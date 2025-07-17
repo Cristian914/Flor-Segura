@@ -5,6 +5,7 @@ import Login from "./pages/loginPage"
 import Sobre from "./pages/sobre"
 import CentralDeAjuda from "./pages/centralDeAjuda"
 import Register from "./pages/registerPage"
+import MotoristaPage from "./pages/motoristaPage"
 
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
         <Route path="/about" element={<Sobre />} />
         <Route path="/help" element={<CentralDeAjuda />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/motorista" element={<Register />} />
+        <Route path="/motorista" element={<MotoristaPage />} />
       </Routes>
     </Router>
   )
