@@ -19,8 +19,8 @@ const LoginForm = () => {
         <h2 className="text-2xl font-semibold text-red-400 mb-6">Login</h2>
        
         <form onSubmit={handleSubmit}>
+          <div className="space-y-2">
           <div>
-            <label className="">E-mail</label>
             <input
               id="email"
               type="email"
@@ -28,12 +28,11 @@ const LoginForm = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 text-sm sm:text-base border border-gray-300"
+              className="w-full px-4 py-2  rounded-md bg-red-100 placeholder-amber-950 "
               placeholder="Digite seu email"
             />
           </div>
           <div>
-            <label>Senha</label>
             <input
               id="password"
               type="password"
@@ -41,9 +40,10 @@ const LoginForm = () => {
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
               required
-              className="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 text-sm sm:text-base"
+              className="w-full mb-4 px-4 py-2  rounded-md bg-red-100 placeholder-amber-950"
               placeholder="Digite sua senha"
             />
+          </div>
           </div>
           <button
             type="submit"

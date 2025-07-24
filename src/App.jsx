@@ -6,6 +6,7 @@ import Sobre from "./pages/sobre"
 import CentralDeAjuda from "./pages/centralDeAjuda"
 import Register from "./pages/registerPage"
 import MotoristaPage from "./pages/motoristaPage"
+import RegistermotoPage from "./pages/registermotoPage"
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/help" element={<CentralDeAjuda />} />
         <Route path="/register" element={<Register />} />
         <Route path="/motorista" element={<MotoristaPage />} />
+        <Route path="/registermoto" element={<RegistermotoPage />} />
       </Routes>
     </Router>
   )

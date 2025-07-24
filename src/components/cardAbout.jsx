@@ -20,13 +20,13 @@ const CardAbout = () => {
         transition-transform duration-300 hover:scale-105
         
       ">
-        <h2 className="text-4xl  text-center font-extrabold mb-4 drop-shadow-md">
+        <h2 className="text-4xl  text-center font-extrabold mb-4 drop-shadow-md text-amber-950">
           ALÔCAR
         </h2>
-        <p className="text-lg leading-relaxed drop-shadow-sm">
+        <p className="text-lg leading-relaxed drop-shadow-sm text-amber-900 ">
           O Mais Novo Aplicativo De Mobilidade
           <br />
-          <span className="italic opacity-80">Planejamento do sobre.</span>
+          <span className="italic opacity-80">a AlôCar como aplicativo de mobilidade quer garantir a segurança e o conforto junto de velocidade para os passageiros, com nossa frota de motoristas, estaos garantindo a facil mobilidade e mantendo o otimo atendimento </span>
         </p>
       </div>
     </div>

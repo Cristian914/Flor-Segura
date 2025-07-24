@@ -31,8 +31,8 @@ const RegisterForm = () => {
         onSubmit={handleSubmit}
         className="bg-white p-6 rounded-2xl shadow-md w-full max-w-md"
       >
-        <h2 className="text-2xl font-semibold text-center text-black mb-6">
-          Cadastro
+        <h2 className="text-2xl font-semibold text-center text-amber-900 mb-6">
+          Cadastro de passageiro
         </h2>
 
         <input
@@ -41,7 +41,7 @@ const RegisterForm = () => {
           placeholder="Nome completo"
           value={formData.nome}
           onChange={handleChange}
-          className="w-full mb-3 px-4 py-2 border rounded-md bg-red-100 placeholder-amber-950"
+          className="w-full mb-3 px-4 py-2  rounded-md bg-red-100 placeholder-amber-950"
           required
         />
 
@@ -52,7 +52,7 @@ const RegisterForm = () => {
             placeholder="Celular"
             value={formData.celular}
             onChange={handleChange}
-            className="w-1/2 px-4 py-2 border rounded-md bg-red-100 placeholder-amber-950"
+            className="w-1/2 px-4 py-2  rounded-md bg-red-100 placeholder-amber-950"
             required
           />
           <input
@@ -61,7 +61,7 @@ const RegisterForm = () => {
             placeholder="Email"
             value={formData.email}
             onChange={handleChange}
-            className="w-1/2 px-4 py-2 border rounded-md bg-red-100 placeholder-amber-950 "
+            className="w-1/2 px-4 py-2  rounded-md bg-red-100 placeholder-amber-950 "
             required
           />
         </div>
@@ -73,7 +73,7 @@ const RegisterForm = () => {
             placeholder="Endereço"
             value={formData.endereco}
             onChange={handleChange}
-            className="w-1/2 px-4 py-2 border rounded-md bg-red-100 placeholder-amber-950"
+            className="w-1/2 px-4 py-2  rounded-md bg-red-100 placeholder-amber-950"
             required
           />
           <input
@@ -82,7 +82,7 @@ const RegisterForm = () => {
             placeholder="CPF"
             value={formData.cpf}
             onChange={handleChange}
-            className="w-1/2 px-4 py-2 border rounded-md bg-red-100 placeholder-amber-950"
+            className="w-1/2 px-4 py-2  rounded-md bg-red-100 placeholder-amber-950"
             required
           />
         </div>
@@ -93,7 +93,7 @@ const RegisterForm = () => {
           placeholder="Senha"
           value={formData.senha}
           onChange={handleChange}
-          className="w-full mb-4 px-4 py-2 border rounded-md bg-red-100 placeholder-amber-950"
+          className="w-full mb-4 px-4 py-2  rounded-md bg-red-100 placeholder-amber-950"
           required
         />
 
