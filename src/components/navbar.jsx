@@ -60,7 +60,7 @@ const Navbar = () => {
             ) : (
                 <div className='flex text-amber-950 hover:text-[#e69292] mr-2.5 transition-colors duration-300 font-medium'>
                     <FaUserCircle className='flex mt-0.5 text-2xl  ' />
-                <a href="/login" className="pl-1 text-lg font-medium " >Login</a>
+                <a href="/login" className="pl-1 text-lg font-medium " >Passageiros</a>
                 </div>
             )}
         </>

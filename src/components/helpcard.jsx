@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import carh from "../assets/imagens/carh.jpg";
+import { Link } from "react-router-dom";
+
 
 const faqs = [
   {
@@ -24,7 +26,7 @@ const faqs = [
   },
 ];
 
-const HelpCenter = () => {
+const Help = () => {
   const [activeIndex, setActiveIndex] = useState(null);
 
   const toggleFaq = (index) => {
@@ -68,15 +70,17 @@ const HelpCenter = () => {
           />
         </div>
 
-        {/* Botão de Contato */}
-        <div className="flex justify-center mb-12">
-          <a
-            href="mailto:suporte@alocar.com"
-            className="bg-red-500 hover:bg-red-600 text-white font-semibold px-8 py-3 rounded-2xl shadow-md transition"
-          >
-            📧 Fale Conosco
-          </a>
-        </div>
+
+{/* Botão de Contato */}
+<div className="flex justify-center mb-12">
+  <Link
+    to="/contactPage"
+    className="bg-red-500 hover:bg-red-600 text-white font-semibold px-8 py-3 rounded-2xl shadow-md transition"
+  >
+    📧 Fale Conosco
+  </Link>
+</div>
+
 
         {/* FAQ */}
         <section className="bg-red-50 bg-opacity-80 rounded-3xl p-6 sm:p-8 shadow-lg max-w-4xl mx-auto">
@@ -146,4 +150,4 @@ const Card = ({ icon, title, description, isContact }) => (
   </div>
 );
 
-export default HelpCenter;
+export default Help;

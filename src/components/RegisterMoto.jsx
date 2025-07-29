@@ -22,7 +22,7 @@ const Registermoto = () => {
     e.preventDefault();
     localStorage.setItem("user", JSON.stringify(formData));
     alert("Cadastro concluído!");
-    window.location.href = "/";
+    window.location.href = "/registerCar";
   };
 
   return (
@@ -97,12 +97,12 @@ const Registermoto = () => {
           required
         />
 
-        <button
+       <a href="/registerCar"> <button
           type="submit"
           className="w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg transition duration-300"
         >
           Continuar cadastro
-        </button>
+        </button></a>
       </form>
     </div>
   );

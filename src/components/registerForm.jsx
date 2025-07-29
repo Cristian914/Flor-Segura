@@ -18,11 +18,40 @@ const RegisterForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    localStorage.setItem("user", JSON.stringify(formData));
-    alert("Cadastro concluído!");
-    window.location.href = "/";
+
+    // Ajusta os nomes dos campos conforme o backend espera
+    const dataToSend = {
+      name: formData.nome,
+      email: formData.email,
+      password: formData.senha,
+      phone: formData.celular,
+      cpf: formData.cpf,
+      address: formData.endereco,
+    };
+
+    try {
+      const response = await fetch("http://localhost:5000/api/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataToSend),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert("Cadastro concluído com sucesso!");
+        window.location.href = "/";
+      } else {
+        alert("Erro: " + result.message);
+      }
+    } catch (error) {
+      console.error("Erro ao cadastrar:", error);
+      alert("Erro na comunicação com o servidor.");
+    }
   };
 
   return (
@@ -41,7 +70,7 @@ const RegisterForm = () => {
           placeholder="Nome completo"
           value={formData.nome}
           onChange={handleChange}
-          className="w-full mb-3 px-4 py-2  rounded-md bg-red-100 placeholder-amber-950"
+          className="w-full mb-3 px-4 py-2 rounded-md bg-red-100 placeholder-amber-950"
           required
         />
 
@@ -52,7 +81,7 @@ const RegisterForm = () => {
             placeholder="Celular"
             value={formData.celular}
             onChange={handleChange}
-            className="w-1/2 px-4 py-2  rounded-md bg-red-100 placeholder-amber-950"
+            className="w-1/2 px-4 py-2 rounded-md bg-red-100 placeholder-amber-950"
             required
           />
           <input
@@ -61,7 +90,7 @@ const RegisterForm = () => {
             placeholder="Email"
             value={formData.email}
             onChange={handleChange}
-            className="w-1/2 px-4 py-2  rounded-md bg-red-100 placeholder-amber-950 "
+            className="w-1/2 px-4 py-2 rounded-md bg-red-100 placeholder-amber-950"
             required
           />
         </div>
@@ -73,7 +102,7 @@ const RegisterForm = () => {
             placeholder="Endereço"
             value={formData.endereco}
             onChange={handleChange}
-            className="w-1/2 px-4 py-2  rounded-md bg-red-100 placeholder-amber-950"
+            className="w-1/2 px-4 py-2 rounded-md bg-red-100 placeholder-amber-950"
             required
           />
           <input
@@ -82,7 +111,7 @@ const RegisterForm = () => {
             placeholder="CPF"
             value={formData.cpf}
             onChange={handleChange}
-            className="w-1/2 px-4 py-2  rounded-md bg-red-100 placeholder-amber-950"
+            className="w-1/2 px-4 py-2 rounded-md bg-red-100 placeholder-amber-950"
             required
           />
         </div>
@@ -93,7 +122,7 @@ const RegisterForm = () => {
           placeholder="Senha"
           value={formData.senha}
           onChange={handleChange}
-          className="w-full mb-4 px-4 py-2  rounded-md bg-red-100 placeholder-amber-950"
+          className="w-full mb-4 px-4 py-2 rounded-md bg-red-100 placeholder-amber-950"
           required
         />
 
