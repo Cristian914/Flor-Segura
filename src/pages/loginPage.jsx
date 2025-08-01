@@ -1,20 +1,16 @@
 import React from "react";
-import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import LoginForm from "../components/loginform";
 
-const Login = () => {
-    return (
-        <>
-            <div className="flex flex-col min-h-screen">
-                <Navbar />
-                <div>
-                    <LoginForm/>
-                </div>
-                <Footer />
-            </div>
-        </>
-    )
-}
+const Login = ({ setIsLoggedIn }) => {
+  return (
+    <div className="flex flex-col min-h-screen">
+      <div>
+        <LoginForm setIsLoggedIn={setIsLoggedIn} />
+      </div>
+      <Footer />
+    </div>
+  );
+};
 
-export default Login
+export default Login;

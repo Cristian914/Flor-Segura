@@ -1,30 +1,59 @@
 import React, { useState } from "react";
 
 const Registermoto = () => {
-  const [formData, setFormData] = useState({
-    nome: "",
-    email: "",
-    senha: "",
-    celular: "",
-    cpf: "",
-    endereco: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    localStorage.setItem("user", JSON.stringify(formData));
-    alert("Cadastro concluído!");
-    window.location.href = "/registerCar";
-  };
-
+    const [formData, setFormData] = useState({
+      nome: "",
+      email: "",
+      senha: "",
+      celular: "",
+      cpf: "",
+      endereco: "",
+    });
+  
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    };
+  
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+  
+      // Ajusta os nomes dos campos conforme o backend espera
+      const dataToSend = {
+        name: formData.nome,
+        email: formData.email,
+        password: formData.senha,
+        phone: formData.celular,
+        cpf: formData.cpf,
+        address: formData.endereco,
+      };
+  
+      try {
+        const response = await fetch("http://localhost:5000/api/moto", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(dataToSend),
+        });
+  
+        const result = await response.json();
+  
+        if (response.ok) {
+          alert("Cadastro concluído com sucesso!");
+          window.location.href = "/registrocarro";
+        } else {
+          alert("Erro: " + result.message);
+        }
+      } catch (error) {
+        console.error("Erro ao cadastrar:", error);
+        alert("Erro na comunicação com o servidor.");
+      }
+    };
+  
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-red-100 via-white to-red-200 p-4">
       <form
@@ -97,12 +126,12 @@ const Registermoto = () => {
           required
         />
 
-       <a href="/registerCar"> <button
+        <button
           type="submit"
           className="w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg transition duration-300"
         >
           Continuar cadastro
-        </button></a>
+        </button>
       </form>
     </div>
   );

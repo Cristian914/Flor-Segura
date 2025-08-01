@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Registrocarro = () => {
   const [carroData, setCarroData] = useState({
@@ -8,7 +8,23 @@ const Registrocarro = () => {
     ano: "",
     cor: "",
     documento: "",
+    motoId: "", // necessário para vincular ao motorista
   });
+
+  const [motoristaLogado, setMotoristaLogado] = useState(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      try {
+        const user = JSON.parse(storedUser);
+        setCarroData((prev) => ({ ...prev, motoId: user.id }));
+        setMotoristaLogado(user);
+      } catch (error) {
+        console.warn("❌ Erro ao carregar dados do motorista:", error);
+      }
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,6 +36,11 @@ const Registrocarro = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!carroData.motoId) {
+      alert("⚠️ Você precisa estar logado como motorista para cadastrar um carro.");
+      return;
+    }
 
     try {
       const response = await fetch("http://localhost:5000/api/carro/registrar", {
@@ -33,18 +54,26 @@ const Registrocarro = () => {
       const data = await response.json();
 
       if (response.ok) {
-        console.log("✅ Resposta do backend:", data);
-        alert("Cadastro do carro concluído!");
+        alert("✅ Cadastro do carro concluído!");
         window.location.href = "/";
       } else {
-        console.error("❌ Erro ao cadastrar carro:", data);
-        alert("Erro ao cadastrar o carro: " + data.message);
+        alert("❌ Erro ao cadastrar o carro: " + data.message);
       }
     } catch (error) {
       console.error("❌ Erro de rede:", error);
       alert("Erro de rede ao cadastrar o carro.");
     }
   };
+
+  if (!motoristaLogado) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-lg font-semibold text-red-600">
+          Você precisa estar logado como motorista para acessar esta página.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-red-100 via-white to-red-200 p-4">

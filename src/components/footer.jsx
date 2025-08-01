@@ -1,60 +1,63 @@
 import React from "react";
+import { Link } from "react-router-dom";  // IMPORTAR O LINK
 import Logo from "../assets/imagens/logo.png";
 
 const Footer = () => {
-  
-
   return (
-    <>
-      {/* Botão para mostrar/esconder footer */}
-    
+    <footer className="w-full bg-gradient-to-l from-red-300 to-white text-red-800 py-8 px-6 shadow-inner mt-auto">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+        {/* Logo e slogan */}
+        <div className="flex flex-col items-start">
+          <img
+            src={Logo}
+            alt="Logo AlôCar"
+            className="w-28 mb-3"
+          />
+          <p className="text-sm font-semibold tracking-wide">
+            &copy; {new Date().getFullYear()} Alô-Car. Sempre Acompanhando você
+          </p>
+        </div>
 
-     
-      {/* Footer que aparece só quando mostrarFooter é true */}
-      
-        <footer className="w-full h-23 bg-gradient-to-l from-red-300 to-white text-gray-400 py-0 px-6 shadow-lg mt-auto  bottom-0 left-0 right-0">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <img
-                src={Logo}
-                alt="Logo"
-                className="flex w-24 mb-4 py-4 mt-3 ml-20"
-              />
-              <p className="text-sm -mt-4 text-red-700 cursor-pointer hover:underline">
-                &copy; Alo-Car. Sempre Acompanhando você
-              </p>
-            </div>
+        {/* Central de Atendimento */}
+        <div>
+          <h4 className="font-bold text-lg mb-3 border-b-2 border-red-600 pb-1">
+            Central de Atendimento
+          </h4>
+          <p className="text-sm mb-1">Segunda a sexta: <span className="font-semibold">07h às 22h</span></p>
+          <p className="text-sm mb-1">Sábados, domingos e feriados: <span className="font-semibold">09h às 18h</span></p>
+          <Link
+            to="/help"
+            className="mt-2 inline-block text-sm font-semibold bg-red-600 hover:bg-red-700 text-white py-1 px-3 rounded transition-colors"
+          >
+            Acessar atendimento
+          </Link>
+        </div>
 
-            <div className="text-red-600">
-              <h4 className="font-semibold mb-2">Central de Atendimento</h4>
-              <p className="text-sm">De segunda a sexta das 07h às 22h.</p>
-              <p className="text-sm">Sábado, domingo e feriado das 09h às 18h</p>
-              <p className="text-sm">Acessar atendimento</p>
-            </div>
+        {/* Serviços */}
+        <div>
+          <h4 className="font-bold text-lg mb-3 border-b-2 border-red-600 pb-1">
+            Serviços
+          </h4>
+          <ul className="text-sm space-y-2">
+            <li className="cursor-pointer hover:underline">Motoristas Parceiros</li>
+            <li className="cursor-pointer hover:underline">Agendar Corridas</li>
+            <li className="cursor-pointer hover:underline">Termos de Uso</li>
+            <li className="cursor-pointer hover:underline">Política de Privacidade</li>
+          </ul>
+        </div>
 
-            <div>
-              <h4 className="font-semibold mb-2"></h4>
-              <ul className="text-sm space-y-1">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-              </ul>
-            </div>
-
-            <div className="text-red-600">
-              <h4 className="font-semibold mb-2">Outros</h4>
-              <ul className="text-sm space-y-1">
-                <li>Dúvidas frequentes</li>
-                <li>Canal de transparência é confiável?</li>
-              </ul>
-            </div>
-          </div>
-        </footer>
-    
-    </>
+        {/* Outros */}
+        <div>
+          <h4 className="font-bold text-lg mb-3 border-b-2 border-red-600 pb-1">
+            Outros
+          </h4>
+          <ul className="text-sm space-y-2">
+            <li className="cursor-pointer hover:underline">Dúvidas frequentes</li>
+            <li className="cursor-pointer hover:underline">Canal de transparência é confiável?</li>
+          </ul>
+        </div>
+      </div>
+    </footer>
   );
 };
 
