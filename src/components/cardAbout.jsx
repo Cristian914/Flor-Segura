@@ -16,7 +16,7 @@ const CardAbout = () => {
         </h2>
 
         {/* Sobre o app */}
-        <section className="bg-red-300/50 backdrop-blur-md rounded-3xl p-8 shadow-lg text-amber-900">
+        <section className="bg-red-300/50 backdrop-blur-md rounded-3xl p-8 shadow-lg text-amber-950">
           <h3 className="text-3xl font-bold mb-4">O Que É AlôCar?</h3>
           <p className="text-lg italic leading-relaxed">
             A AlôCar, como aplicativo de mobilidade, quer garantir a segurança e o conforto junto de velocidade para os passageiros, com nossa frota de motoristas. Estamos garantindo a fácil mobilidade e mantendo o ótimo atendimento.
@@ -24,7 +24,7 @@ const CardAbout = () => {
         </section>
 
         {/* História */}
-        <section className="bg-red-200/40 backdrop-blur-md rounded-3xl p-8 shadow-lg text-amber-900">
+        <section className="bg-red-200/40 backdrop-blur-md rounded-3xl p-8 shadow-lg text-amber-950">
           <h3 className="text-3xl font-bold mb-4">Nossa História</h3>
           <p className="text-lg leading-relaxed">
             Fundada em <strong>2025</strong>, a AlôCar nasceu da paixão por transformar o jeito que as pessoas se locomovem nas cidades. Desde então, temos crescido e inovado para entregar um serviço ágil, seguro e acessível para todos.
@@ -35,7 +35,7 @@ const CardAbout = () => {
         <div className="flex flex-col md:flex-row md:space-x-8">
 
           {/* Valores */}
-          <section className="flex-1 bg-red-300/40 backdrop-blur-md rounded-3xl p-6 shadow-lg text-amber-900 mb-6 md:mb-0">
+          <section className="flex-1 bg-red-300/40 backdrop-blur-md rounded-3xl p-6 shadow-lg text-amber-950 mb-6 md:mb-0">
             <h3 className="text-2xl font-bold mb-3">Nossos Valores</h3>
             <ul className="list-disc list-inside space-y-2">
               <li>Segurança acima de tudo</li>
@@ -46,7 +46,7 @@ const CardAbout = () => {
           </section>
 
           {/* Benefícios */}
-          <section className="flex-1 bg-red-200/30 backdrop-blur-md rounded-3xl p-6 shadow-lg text-amber-900">
+          <section className="flex-1 bg-red-200/30 backdrop-blur-md rounded-3xl p-6 shadow-lg text-amber-950">
             <h3 className="text-2xl font-bold mb-3">Benefícios para você</h3>
             <ul className="list-disc list-inside space-y-2">
               <li>Motoristas avaliados e confiáveis</li>
@@ -74,8 +74,8 @@ const CardAbout = () => {
       >
         <h4 className="text-lg mb-2 text-center font-bold">Nossa Equipe</h4>
         <ul className="grid grid-cols-2 gap-1 text-center">
-          <li>Luccas</li>
-          <li>Nycolas</li>
+          <li>Lucas</li>
+          <li>Nycollas</li>
           <li>Elizeu</li>
           <li>Cristian</li>
           <li>Aybran</li>
