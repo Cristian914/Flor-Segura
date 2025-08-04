@@ -43,7 +43,7 @@ const Registrocarro = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/carro/registrar", {
+      const response = await fetch("https://al-car-back-end.onrender.com/api/carro/registrar", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

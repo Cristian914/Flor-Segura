@@ -6,7 +6,7 @@ const PerfilMotorista = () => {
   useEffect(() => {
     const fetchPerfil = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/moto/1/profile', {
+        const response = await fetch('https://al-car-back-end.onrender.com/api/moto/1/profile', {
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`
           }
