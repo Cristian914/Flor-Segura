@@ -1,4 +1,5 @@
 import React from "react";
+<<<<<<< HEAD
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/navbar";
 import Cardhome from "../assets/imagens/cardhome.png";
@@ -6,6 +7,19 @@ import LogoFlor from "../assets/imagens/logohome.png";
 
 const Home = () => {
   const navigate = useNavigate();
+=======
+import Footer from "../components/footer"
+import Hero from "../components/hero";
+
+
+const Home = () => {
+    return (
+        <>
+            <div className="flex flex-col min-h-screen">
+                <div>
+                    <Hero/>
+                </div>
+>>>>>>> 5fd61a78676dd7b294d1be40fb5db72c7686ed6c
 
   return (
     <>
