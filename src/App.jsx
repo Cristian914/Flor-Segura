@@ -1,28 +1,27 @@
-import {BrowserRouter as Router, Routes,Route} from "react-router-dom"
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import PrecisoDeAjuda from "./pages/Login.jsx";
+import MapaDeApoio from "./pages/MapaDeApoio";
+import TesteDeRisco from "./pages/TesteDeRisco";
+import EntendaAViolencia from "./pages/EntendaAViolencia";
+import FaleComAlguem from "./pages/FaleComAlguem";
+import Sobre from "./pages/Sobre";
+import Login from "./pages/Login";
 
-import Home from "./pages/home"
-import Login from "./pages/loginPage"
-import Sobre from "./pages/sobre"
-import CentralDeAjuda from "./pages/centralDeAjuda"
-import Register from "./pages/registerPage"
-import MotoristaPage from "./pages/motoristaPage"
-import RegistermotoPage from "./pages/registermotoPage"
-
-
-function App() {
-  return (                                                       
+export default function App() {
+  return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/preciso-de-ajuda" element={<PrecisoDeAjuda />} />
+        <Route path="/mapa-de-apoio" element={<MapaDeApoio />} />
+        <Route path="/teste-de-risco" element={<TesteDeRisco />} />
+        <Route path="/entenda-a-violencia" element={<EntendaAViolencia />} />
+        <Route path="/fale-com-alguem" element={<FaleComAlguem />} />
+        <Route path="/sobre" element={<Sobre />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/about" element={<Sobre />} />
-        <Route path="/help" element={<CentralDeAjuda />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/motorista" element={<MotoristaPage />} />
-        <Route path="/registermoto" element={<RegistermotoPage />} />
       </Routes>
     </Router>
-  )
+  );
 }
-
-export default App
