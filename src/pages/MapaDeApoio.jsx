@@ -1,7 +1,7 @@
 export default function MapaDeApoio() {
   return (
     <div className="pt-24 text-center">
-      <h1 className="text-3xl font-bold">Preciso de Ajuda</h1>
+      <h1 className="text-3xl font-bold">Pre </h1>
       <p>Página em construção...</p>
     </div>
   );
