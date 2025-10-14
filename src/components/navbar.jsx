@@ -7,19 +7,17 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-purple-700 text-white fixed w-full z-10 shadow-md">
+    <nav className="bg-purple-700 text-white fixed top-0 left-0 w-full z-50 shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
-          
-          {/* Logo no canto esquerdo */}
+          {/* Logo */}
           <div className="flex-shrink-0">
             <Link to="/">
               <img src={Logo} alt="Logo" className="h-28 w-auto" />
-
             </Link>
           </div>
 
-          {/* Menu central */}
+          {/* Menu desktop */}
           <div className="hidden md:flex space-x-6">
             <Link to="/" className="hover:text-gray-200">Home</Link>
             <Link to="/preciso-de-ajuda" className="hover:text-gray-200">Preciso de Ajuda</Link>
@@ -30,13 +28,11 @@ export default function Navbar() {
             <Link to="/sobre" className="hover:text-gray-200">Sobre</Link>
           </div>
 
-          {/* Ícone usuário no canto direito */}
+          {/* Ícone usuário e botão mobile */}
           <div className="flex items-center space-x-4">
             <Link to="/login" className="text-white hover:text-gray-200">
               <FaUser size={24} />
             </Link>
-
-            {/* Botão mobile */}
             <div className="md:hidden">
               <button
                 onClick={() => setIsOpen(!isOpen)}
