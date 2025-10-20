@@ -8,6 +8,9 @@ import EntendaAViolencia from "./pages/EntendaAViolencia";
 import RedeDeApoio from "./pages/RedeDeApoio";
 import Sobre from "./pages/Sobre";
 import Login from "./pages/Login";
+import TestePerguntas from "./pages/TestePerguntas";
+import ResultadoTeste from "./pages/ResultadoTeste";
+
 
 export default function App() {
   return (
@@ -22,6 +25,9 @@ export default function App() {
         <Route path="/rede-de-apoio" element={<RedeDeApoio />} />
         <Route path="/sobre" element={<Sobre />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/teste-de-risco/perguntas" element={<TestePerguntas />} />
+        <Route path="/teste-de-risco/resultado" element={<ResultadoTeste />} />
+
       </Routes>
     </Router>
   );
