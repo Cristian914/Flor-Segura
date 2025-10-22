@@ -10,6 +10,7 @@ import Sobre from "./pages/Sobre";
 import Login from "./pages/Login";
 import TestePerguntas from "./pages/TestePerguntas";
 import ResultadoTeste from "./pages/ResultadoTeste";
+import FaleComAlguem from "./pages/FaleComAlguem";
 
 
 export default function App() {
@@ -21,7 +22,7 @@ export default function App() {
         <Route path="/mapa-de-apoio" element={<MapaDeApoio />} />
         <Route path="/teste-de-risco" element={<TesteDeRisco />} />
         <Route path="/entenda-a-violencia" element={<EntendaAViolencia />} />
-        <Route path="/fale-com-alguem" element={<RedeDeApoio />} />
+        <Route path="/fale-com-alguem" element={<FaleComAlguem />} />
         <Route path="/rede-de-apoio" element={<RedeDeApoio />} />
         <Route path="/sobre" element={<Sobre />} />
         <Route path="/login" element={<Login />} />
