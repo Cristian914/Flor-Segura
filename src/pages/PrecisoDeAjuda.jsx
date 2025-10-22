@@ -10,7 +10,6 @@ export default function PrecisoDeAjuda() {
     <>
       <Navbar />
 
-      {/* REMOVIDO o padding-top e já começamos com a hero */}
       <div className="bg-white text-purple-800 font-sans">
         {/* === SEÇÃO HERO AJUSTADA === */}
         <section className="bg-gradient-to-r from-purple-300 to-purple-200 w-full flex flex-col lg:flex-row items-center justify-between px-10 lg:px-24 py-20 lg:py-28 relative overflow-hidden">
@@ -22,8 +21,8 @@ export default function PrecisoDeAjuda() {
             </h1>
           </div>
 
-          {/* IMAGEM À DIREITA */}
-          <div className="mt-10 lg:mt-0 lg:absolute right-20 bottom-0">
+          {/* IMAGEM AJUSTADA */}
+          <div className="mt-10 lg:mt-12 flex justify-center lg:justify-end">
             <img
               src={CardHelp}
               alt="Pessoas se abraçando"
@@ -34,7 +33,6 @@ export default function PrecisoDeAjuda() {
 
         {/* === SEÇÃO PRECISA DE AJUDA === */}
         <section className="flex flex-col lg:flex-row items-center justify-center gap-8 py-16 px-8 lg:px-24">
-          {/* ÍCONE + TEXTO */}
           <div className="flex items-center justify-center gap-4">
             <div className="bg-purple-200 p-5 rounded-full shadow-md">
               <span className="text-4xl">🛡️</span>
@@ -44,7 +42,6 @@ export default function PrecisoDeAjuda() {
             </h2>
           </div>
 
-          {/* BOTÃO */}
           <button
             onClick={() => navigate("/rede-de-apoio")}
             className="bg-purple-500 hover:bg-purple-600 text-white font-bold text-xl px-10 py-4 rounded-2xl shadow-lg transition-transform transform hover:scale-105"

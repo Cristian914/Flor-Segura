@@ -2,7 +2,7 @@ import React from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import Navbar from "../components/Navbar"; // ajuste conforme sua pasta
+import Navbar from "../components/navbar"; // ajuste conforme sua pasta
 
 const locaisApoio = [
   {
