@@ -1,0 +1,382 @@
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px); /* levemente vindo de baixo */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+ 
+.login-register-container {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 25px 20px;
+  background-color: #fafafa;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(106, 13, 173, 0.2);
+  text-align: center;
+  color: #4b0082;
+  font-weight: 700;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+ 
+.login-register-container h2 {
+  margin-bottom: 25px;
+  color: #6a0dad;
+  font-weight: 900;
+  font-size: 1.8rem;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.15);
+}
+ 
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: left;
+}
+ 
+.form-container label {
+  font-size: 1rem;
+  margin-bottom: 6px;
+  color: #6a0dad;
+}
+ 
+.form-container input {
+  padding: 10px 12px;
+  border: 2px solid #6a0dad;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #4b0082;
+  transition: border-color 0.3s ease;
+}
+ 
+.form-container input:focus {
+  outline: none;
+  border-color: #4a148c;
+  background-color: #f8f0fc;
+}
+ 
+.link-text {
+  color: #6a0dad;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+ 
+.link-text:hover {
+  color: #4a148c;
+}
+ 
+/* ====== FOOTER ====== */
+.footer {
+  background-color: #6a0dad; /* roxo principal */
+  color: #fff;
+  padding: 40px 20px 20px;
+  text-align: center;
+  margin-top: 60px;
+}
+ 
+.footer-conteudo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+ 
+.footer-logo img {
+  width: 100px;
+  margin-bottom: 10px;
+}
+ 
+.footer-logo p {
+  font-size: 0.95rem;
+  color: #f3e5f5;
+  max-width: 300px;
+  margin: 0 auto;
+}
+ 
+/* Links */
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+ 
+.footer-links a {
+  color: #f3e5f5;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+ 
+.footer-links a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+ 
+/* Ícones sociais */
+.footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 10px;
+}
+ 
+.footer-social a {
+  color: #f3e5f5;
+  font-size: 24px;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+ 
+.footer-social a:hover {
+  color: #fff;
+  transform: scale(1.1);
+}
+ 
+/* Direitos autorais */
+.footer-copy {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: 30px;
+  padding-top: 15px;
+}
+ 
+.footer-copy p {
+  font-size: 0.85rem;
+  color: #e1bee7;
+}
+ 
+/* Responsivo */
+@media (min-width: 768px) {
+  .footer-conteudo {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+ 
+  .footer-logo {
+    text-align: left;
+  }
+ 
+  .footer-links,
+  .footer-social {
+    justify-content: flex-end;
+  }
+}
+ 
+/* ===== BOTÕES ===== */
+.inicio-botoes {
+  text-align: center;
+  margin-top: 30px;
+}
+ 
+.botoes-lado-a-lado {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px; /* aumenta o espaçamento entre os botões */
+  flex-wrap: wrap; /* permite quebrar linha em telas pequenas */
+  margin-top: 15px;
+}
+ 
+.btn-roxo,
+.btn-rosa {
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+ 
+.btn-roxo {
+  background-color: #6a0dad;
+  color: #fff;
+}
+ 
+.btn-roxo:hover {
+  background-color: #580a9e;
+}
+ 
+.btn-rosa {
+  background-color: #f8c8dc;
+  color: #6a0dad;
+}
+ 
+.btn-rosa:hover {
+  background-color: #f4b4cf;
+}
+ 
+.ou-texto {
+  display: none; /* podemos ocultar o “ou” já que os botões estão lado a lado */
+}
+ 
+.inicio-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fafafa;
+  color: #333;
+  text-align: center;
+  padding: 20px 10px;
+  min-height: 100vh;
+}
+ 
+.inicio-banner {
+  position: relative;
+  width: 100%;
+  max-height: 300px; /* altura da imagem */
+  overflow: hidden;
+}
+ 
+.inicio-banner img {
+  width: 100%;
+  height: 300px; /* mantém o tamanho */
+  object-fit: cover; /* mantém proporção, corta o excesso */
+  display: block;
+}
+ 
+/* Linha roxa embaixo da imagem */
+.inicio-banner::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 6px; /* altura da linha */
+  background-color: #6a0dad; /* roxo */
+}
+ 
+.social-icons {
+  display: flex;
+  justify-content: center; /* centraliza horizontalmente */
+  gap: 25px; /* espaçamento entre os ícones */
+  padding: 15px 0;
+  background-color: #fff; /* se quiser um fundo branco */
+}
+ 
+.social-icons a {
+  color: #6a0dad; /* roxo da sua linha */
+  font-size: 28px;
+  transition: color 0.3s ease;
+}
+ 
+.social-icons a:hover {
+  color: #4b007a; /* tom roxo mais escuro no hover */
+}
+ 
+.inicio-container {
+  margin: 0;
+  padding: 0;
+}
+ 
+.inicio-texto {
+  max-width: 700px;
+  text-align: left;
+  color: #4b0082;
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 40px;
+ 
+  opacity: 0;
+  animation: fadeIn 1.2s ease-in-out forwards;
+  animation-delay: 0.3s; /* atraso leve para o bloco todo */
+}
+ 
+.inicio-texto h3 {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #6a0dad; /* roxo vibrante */
+  margin-top: 30px;
+  margin-bottom: 10px;
+  letter-spacing: 1.2px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.15);
+  text-align: center;
+  width: 100%;
+  white-space: normal;
+  display: flex;
+  justify-content: center;
+ 
+  opacity: 0; /* começa invisível */
+  animation: fadeIn 1.5s ease-in-out forwards; /* duração e suavidade */
+  animation-delay: 0.5s; /* espera meio segundo antes de começar */
+}
+ 
+ 
+ 
+.inicio-logo {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+ 
+.inicio-logo img {
+  max-width: 300px; /* aumentei de 200px para 300px */
+  height: auto;
+}
+ 
+.inicio-slogan {
+  margin-top: 15px;
+  color: #6a1b9a;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+ 
+.inicio-botoes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+ 
+.inicio-botoes h3 {
+  color: #6a1b9a;
+  margin-bottom: 5px;
+}
+ 
+.inicio-botoes h4 {
+  color: #555;
+  margin: 10px 0 5px;
+}
+ 
+.btn-roxo {
+  background-color: #6a1b9a;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s;
+}
+ 
+.btn-roxo:hover {
+  background-color: #4a148c;
+}
+ 
+.btn-rosa {
+  background-color: #f8bbd0;
+  color: #4a148c;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s;
+}
+ 
+.btn-rosa:hover {
+  background-color: #f48fb1;
+}
+ 
+ 

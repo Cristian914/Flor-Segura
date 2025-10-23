@@ -13,13 +13,13 @@ export default function Navbar() {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link to="/">
-              <img src={Logo} alt="Logo" className="h-28 w-auto" />
+              <img src={Logo} alt="Logo" className="h-20 w-auto" />
             </Link>
           </div>
 
           {/* Menu desktop */}
           <div className="hidden md:flex space-x-6">
-            <Link to="/" className="hover:text-gray-200">Home</Link>
+            <Link to="/home" className="hover:text-gray-200">Home</Link>
             <Link to="/preciso-de-ajuda" className="hover:text-gray-200">Preciso de Ajuda</Link>
             <Link to="/mapa-de-apoio" className="hover:text-gray-200">Mapa de Apoio</Link>
             <Link to="/teste-de-risco" className="hover:text-gray-200">Teste de risco</Link>

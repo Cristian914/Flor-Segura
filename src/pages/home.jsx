@@ -20,7 +20,7 @@ const Home = () => {
               <img
                 src={LogoFlor}
                 alt="Logo Flor Segura"
-                className="w-40 mx-auto lg:mx-0"
+                className="w-60 md:w-52 lg:w-66 mx-auto lg:mx-0"
               />
             </div>
 
@@ -67,7 +67,7 @@ const Home = () => {
 
               <button
                 className="bg-purple-700 hover:bg-purple-800 text-white font-semibold px-8 py-4 rounded-3xl flex items-center gap-3 shadow-md transition-transform transform hover:scale-105"
-                onClick={() => navigate("/about")}
+                onClick={() => navigate("/sobre")}
               >
                 <span className="text-2xl">❓</span> Descubra Mais Sobre a Flor Segura
               </button>

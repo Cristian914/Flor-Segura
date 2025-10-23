@@ -55,7 +55,7 @@ export default function ResultadoTeste() {
         </button>
 
         <button
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/home")}
           className="px-6 py-3 bg-gray-300 text-purple-700 rounded-lg font-medium hover:bg-gray-400 transition-all"
         >
           Voltar à Home

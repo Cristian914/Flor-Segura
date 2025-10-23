@@ -11,8 +11,8 @@ export default function PrecisoDeAjuda() {
       <Navbar />
 
       <div className="bg-white text-purple-800 font-sans">
-        {/* === SEÇÃO HERO AJUSTADA === */}
-        <section className="bg-gradient-to-r from-purple-300 to-purple-200 w-full flex flex-col lg:flex-row items-center justify-between px-10 lg:px-24 py-20 lg:py-28 relative overflow-hidden">
+        {/* === SEÇÃO HERO AJUSTADA (diminuí altura e subi imagem) === */}
+        <section className="bg-gradient-to-r from-purple-300 to-purple-200 w-full flex flex-col lg:flex-row items-center justify-between px-10 lg:px-24 py-16 lg:py-20 relative overflow-hidden">
           {/* TEXTO PRINCIPAL */}
           <div className="text-center lg:text-left max-w-xl z-10">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-snug">
@@ -21,8 +21,8 @@ export default function PrecisoDeAjuda() {
             </h1>
           </div>
 
-          {/* IMAGEM AJUSTADA */}
-          <div className="mt-10 lg:mt-12 flex justify-center lg:justify-end">
+          {/* IMAGEM AJUSTADA (subi aproximando do texto) */}
+          <div className="mt-6 lg:mt-6 flex justify-center lg:justify-end">
             <img
               src={CardHelp}
               alt="Pessoas se abraçando"

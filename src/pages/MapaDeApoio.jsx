@@ -2,7 +2,7 @@ import React from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import Navbar from "../components/navbar"; // ajuste conforme sua pasta
+import Navbar from "../components/navbar";
 
 const locaisApoio = [
   {
@@ -12,12 +12,15 @@ const locaisApoio = [
     horario: "8:00 - 19:30",
     coords: [-22.2304, -45.9376],
   },
-  // você pode adicionar mais locais aqui depois
+  // Adicione mais locais aqui
 ];
 
+// 🔹 Novo ícone de localização (pin roxo moderno)
 const customIcon = L.icon({
-  iconUrl: "https://cdn-icons-png.flaticon.com/512/854/854878.png",
-  iconSize: [38, 38],
+  iconUrl: "https://cdn-icons-png.flaticon.com/512/684/684908.png", // ícone de localização
+  iconSize: [40, 40], // tamanho do ícone
+  iconAnchor: [20, 40], // ponto da base do marcador
+  popupAnchor: [0, -40], // posição do popup
 });
 
 export default function MapaDeApoio() {
@@ -35,7 +38,9 @@ export default function MapaDeApoio() {
         <div className="flex flex-col lg:flex-row justify-center items-start gap-10">
           {/* Card */}
           <div className="bg-white bg-opacity-90 backdrop-blur-md rounded-3xl shadow-2xl max-w-md w-full p-8 border border-purple-200 transition-transform hover:scale-105">
-            <h2 className="text-3xl font-semibold text-purple-800 mb-4">{local.nome}</h2>
+            <h2 className="text-3xl font-semibold text-purple-800 mb-4">
+              {local.nome}
+            </h2>
             <p className="text-purple-700 text-lg mb-2">{local.endereco}</p>
 
             <div className="flex items-center gap-3 text-purple-600 mb-4">
@@ -56,8 +61,12 @@ export default function MapaDeApoio() {
               <p className="text-md font-medium">{local.telefone}</p>
             </div>
 
-            <p className="text-purple-700 font-medium mb-1">Horário de funcionamento:</p>
-            <p className="text-purple-800 font-semibold mb-6">{local.horario}</p>
+            <p className="text-purple-700 font-medium mb-1">
+              Horário de funcionamento:
+            </p>
+            <p className="text-purple-800 font-semibold mb-6">
+              {local.horario}
+            </p>
 
             <a
               href={`tel:${local.telefone.replace(/\D/g, "")}`}
@@ -69,7 +78,12 @@ export default function MapaDeApoio() {
 
           {/* Mapa */}
           <div className="w-full max-w-lg h-[480px] rounded-3xl shadow-xl border border-purple-300 overflow-hidden transition-transform hover:scale-105">
-            <MapContainer center={local.coords} zoom={15} scrollWheelZoom={true} className="h-full w-full">
+            <MapContainer
+              center={local.coords}
+              zoom={15}
+              scrollWheelZoom={true}
+              className="h-full w-full"
+            >
               <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
