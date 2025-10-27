@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/navbar";
 
 export default function TestePerguntas() {
   const navigate = useNavigate();
@@ -31,6 +32,8 @@ export default function TestePerguntas() {
   };
 
   return (
+    <>
+    <Navbar/>
     <div className="min-h-screen bg-purple-100 p-8 flex flex-col items-center">
       <div className="bg-white shadow-lg rounded-2xl p-10 w-full max-w-3xl">
         <h1 className="text-3xl font-bold text-purple-800 mb-6 text-center">
@@ -71,5 +74,6 @@ export default function TestePerguntas() {
         </button>
       </div>
     </div>
+    </>
   );
 }

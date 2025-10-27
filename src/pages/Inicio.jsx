@@ -79,7 +79,7 @@ function Inicio() {
           <h4>Vamos começar?</h4>
  
           <div className="botoes-lado-a-lado">
-            <button className="btn-roxo" onClick={() => navigate("/login")}>
+            <button className="btn-roxo" onClick={() => navigate("/register")}>
               Criar uma conta
             </button>
  

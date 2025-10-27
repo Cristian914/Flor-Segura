@@ -1,123 +1,149 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// LoginPage.jsx
+import React, { useState } from 'react';
+import { users } from '../services/mockApi'; // Importe os dados mockados
+import { motion } from 'framer-motion';
+import { FaUser, FaLock } from 'react-icons/fa';
+import LogoHome from '../assets/imagens/logohome.png'; // ajuste caminho se necessário
+import { useNavigate } from 'react-router-dom'; // se estiver usando react-router
  
-function Login() {
+const LoginPage = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
  
-  const handleSubmit = (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    // Aqui você pode colocar a lógica para autenticar o usuário
-    console.log({ email, password });
+    setError('');
+    setLoading(true);
+ 
+    const user = users.find(user => user.email === email);
+    if (!user) {
+      setError('Usuário não encontrado.');
+      setLoading(false);
+      return;
+    }
+ 
+    if (user.password !== password) {
+      setError('Senha incorreta.');
+      setLoading(false);
+      return;
+    }
+ 
+    // Armazenar dados no localStorage
+    localStorage.setItem('userEmail', user.email);
+    localStorage.setItem('isLoggedIn', 'true');
+ 
+    // Redirecionar para a página inicial ou área protegida
+    navigate('/home');
+ 
+    setLoading(false);
   };
  
   return (
-    <div style={styles.container}>
-      <img src="/logo.png" alt="Logo FlorSegura" style={styles.logo} />
-      <div style={styles.card}>
-        <h2 style={{ marginBottom: 20 }}>Entrar na sua conta</h2>
- 
-        <form onSubmit={handleSubmit} style={styles.form}>
-          <label htmlFor="email" style={styles.label}>Email</label>
-          <input
-            type="email"
-            id="email"
-            placeholder="Digite seu email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            style={styles.input}
-          />
- 
-          <label htmlFor="password" style={styles.label}>Senha</label>
-          <input
-            type="password"
-            id="password"
-            placeholder="Digite sua senha"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            style={styles.input}
-          />
- 
-          <button type="submit" style={styles.button}
-           onClick={() => navigate("/home")}
-          >
-            Entrar
-          </button>
-        </form>
- 
-        <p style={{ marginTop: 20 }}>
-          Não tem uma conta?{" "}
-          <span
-            style={styles.linkText}
-            onClick={() => navigate("/register")}
-          >
-            Crie uma aqui
+    <div className="min-h-screen flex">
+      <motion.div
+        initial={{ x: -100, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="hidden md:flex w-1/2 bg-gradient-to-br from-purple-300 to-purple-200 flex-col items-center justify-center text-center text-purple-900 p-10 relative overflow-hidden"
+      >
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 0.1 }}
+          transition={{ duration: 1.5 }}
+          className="absolute inset-0 flex items-center justify-center pointer-events-none"
+        >
+          <span className="text-[200px] font-serif text-purple-400 select-none">
+            🌸
           </span>
-        </p>
-      </div>
+        </motion.div>
+ 
+        <img
+          src={LogoHome}
+          alt="Logo Flor Segura"
+          className="w-48 mb-6 drop-shadow-lg relative z-10"
+        />
+ 
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 1 }}
+          className="bg-white/40 backdrop-blur-sm rounded-2xl p-6 shadow-md max-w-md relative z-10"
+        >
+          <p className="text-xl font-medium leading-relaxed text-purple-900">
+            Nenhuma mulher nasceu para viver com medo.
+            <br />
+            <span className="font-semibold text-purple-700">
+              Aqui, você encontra acolhimento, força e liberdade. 💜
+            </span>
+          </p>
+        </motion.div>
+      </motion.div>
+ 
+      <motion.div
+        initial={{ x: 100, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="w-full md:w-1/2 flex items-center justify-center p-10 bg-white"
+      >
+        <div className="w-full max-w-sm">
+          <h2 className="text-3xl font-bold mb-6 text-gray-800 text-center">
+            Login
+          </h2>
+ 
+          <form className="space-y-6" onSubmit={handleLogin}>
+            <div className="relative">
+              <FaUser className="absolute top-3 left-3 text-gray-500" />
+              <input
+                type="email"
+                placeholder="E-mail"
+                className="w-full border rounded-2xl pl-10 p-3 focus:ring-2 focus:ring-purple-400 outline-none shadow-md"
+                required
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+              />
+            </div>
+ 
+            <div className="relative">
+              <FaLock className="absolute top-3 left-3 text-gray-500" />
+              <input
+                type="password"
+                placeholder="Senha"
+                className="w-full border rounded-2xl pl-10 p-3 focus:ring-2 focus:ring-purple-400 outline-none shadow-md"
+                required
+                minLength={6}
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+              />
+            </div>
+ 
+            {error && (
+              <p className="text-red-500 text-center">{error}</p>
+            )}
+ 
+            <button
+              type="submit"
+              className="w-full bg-purple-500 text-white py-3 rounded-2xl font-semibold hover:bg-purple-600 transition shadow-md disabled:opacity-50"
+              disabled={loading}
+            >
+              {loading ? "Entrando…" : "Entrar"}
+            </button>
+          </form>
+ 
+          <p className="text-center text-gray-600 mt-4">
+            Novo por aqui?{" "}
+            <span className="text-purple-600 hover:underline cursor-pointer"
+            onClick={() => navigate("/register")}>
+              Criar conta
+            </span>
+          </p>
+        </div>
+      </motion.div>
     </div>
   );
-}
- 
-const styles = {
-  container: {
-    minHeight: "100vh",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
-    backgroundColor: "#f8f8f8",
-  },
-  logo: {
-    width: 150,
-    marginBottom: 30,
-  },
-  card: {
-    backgroundColor: "#fff",
-    padding: 30,
-    borderRadius: 8,
-    boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
-    width: "100%",
-    maxWidth: 400,
-    boxSizing: "border-box",
-  },
-  form: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  label: {
-    marginBottom: 5,
-    color: "#555555",
-    fontWeight: "600",
-  },
-  input: {
-    padding: 10,
-    marginBottom: 15,
-    borderRadius: 4,
-    border: "1px solid #ccc",
-    fontSize: 16,
-  },
-  button: {
-    backgroundColor: "#6A1B9A", // roxo da paleta
-    color: "#fff",
-    padding: 12,
-    border: "none",
-    borderRadius: 4,
-    cursor: "pointer",
-    fontWeight: "700",
-    fontSize: 16,
-  },
-  linkText: {
-    color: "#6A1B9A",
-    cursor: "pointer",
-    fontWeight: "600",
-  },
 };
  
-export default Login;
- 
+export default LoginPage;
  

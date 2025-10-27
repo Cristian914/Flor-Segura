@@ -10,7 +10,6 @@ import Sobre from "./pages/Sobre";
 import Login from "./pages/Login";
 import Register from "./pages/Register";  // Importando Register
 import Inicio from "./pages/Inicio";
-import FaleComAlguem from "./pages/FaleComAlguem";
 import TestePerguntas from "./pages/TestePerguntas";
 import ResultadoTeste from "./pages/ResultadoTeste"
 
@@ -27,7 +26,6 @@ function App() {
         <Route path="/mapa-de-apoio" element={<MapaDeApoio />} />
         <Route path="/teste-de-risco" element={<TesteDeRisco />} />
         <Route path="/entenda-a-violencia" element={<EntendaAViolencia />} />
-        <Route path="/fale-com-alguem" element={<FaleComAlguem />} />
         <Route path="/rede-de-apoio" element={<RedeDeApoio />} />
         <Route path="/teste-de-risco/perguntas" element={<TestePerguntas />} />
         <Route path="/teste-de-risco/resultado" element={<ResultadoTeste />} />

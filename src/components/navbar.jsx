@@ -24,7 +24,6 @@ export default function Navbar() {
             <Link to="/mapa-de-apoio" className="hover:text-gray-200">Mapa de Apoio</Link>
             <Link to="/teste-de-risco" className="hover:text-gray-200">Teste de risco</Link>
             <Link to="/entenda-a-violencia" className="hover:text-gray-200">Entenda a Violência</Link>
-            <Link to="/fale-com-alguem" className="hover:text-gray-200">Fale com Alguém</Link>
             <Link to="/sobre" className="hover:text-gray-200">Sobre</Link>
           </div>
 

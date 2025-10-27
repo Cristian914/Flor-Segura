@@ -1,11 +1,14 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import MulherImg from "../assets/imagens/mulher.png";
+import Navbar from "../components/navbar";
 
 export default function TesteDeRisco() {
   const navigate = useNavigate();
 
   return (
+    <>
+    <Navbar/>
     <div className="min-h-screen bg-purple-100 flex flex-col items-center justify-center p-8">
       <div className="bg-white shadow-lg rounded-2xl flex flex-col lg:flex-row items-center p-8 gap-10 max-w-4xl">
         {/* Texto */}
@@ -27,7 +30,7 @@ export default function TesteDeRisco() {
             </button>
 
             <button
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/home")}
               className="border-2 border-purple-600 text-purple-600 font-bold px-8 py-3 rounded-full hover:bg-purple-100 transition-transform transform hover:scale-105"
             >
               Voltar à Home
@@ -45,5 +48,6 @@ export default function TesteDeRisco() {
         </div>
       </div>
     </div>
+    </>
   );
 }
