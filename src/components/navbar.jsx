@@ -22,9 +22,11 @@ export default function Navbar() {
             <Link to="/home" className="hover:text-gray-200">Home</Link>
             <Link to="/preciso-de-ajuda" className="hover:text-gray-200">Preciso de Ajuda</Link>
             <Link to="/mapa-de-apoio" className="hover:text-gray-200">Mapa de Apoio</Link>
-            <Link to="/teste-de-risco" className="hover:text-gray-200">Teste de risco</Link>
+            <Link to="/meu-espaco-seguro" className="hover:text-gray-200">Espaço Seguro</Link>
             <Link to="/entenda-a-violencia" className="hover:text-gray-200">Entenda a Violência</Link>
             <Link to="/sobre" className="hover:text-gray-200">Sobre</Link>
+            <Link to="/assistente" className="hover:text-gray-200">Companheiro</Link>
+
           </div>
 
           {/* Ícone usuário e botão mobile */}

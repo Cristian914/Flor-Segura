@@ -3,15 +3,15 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/home";
 import PrecisoDeAjuda from "./pages/PrecisoDeAjuda.jsx";
 import MapaDeApoio from "./pages/MapaDeApoio";
-import TesteDeRisco from "./pages/TesteDeRisco";
 import EntendaAViolencia from "./pages/EntendaAViolencia";
 import RedeDeApoio from "./pages/RedeDeApoio";
 import Sobre from "./pages/Sobre";
 import Login from "./pages/Login";
 import Register from "./pages/Register";  // Importando Register
 import Inicio from "./pages/Inicio";
-import TestePerguntas from "./pages/TestePerguntas";
-import ResultadoTeste from "./pages/ResultadoTeste"
+import MeuEspacoSeguro from "./pages/MeuEspacoSeguro";
+import AssistenteVirtual from "./pages/AssistenteVirtual"
+
 
 function App() {
   return (
@@ -24,11 +24,12 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/preciso-de-ajuda" element={<PrecisoDeAjuda />} />
         <Route path="/mapa-de-apoio" element={<MapaDeApoio />} />
-        <Route path="/teste-de-risco" element={<TesteDeRisco />} />
         <Route path="/entenda-a-violencia" element={<EntendaAViolencia />} />
         <Route path="/rede-de-apoio" element={<RedeDeApoio />} />
-        <Route path="/teste-de-risco/perguntas" element={<TestePerguntas />} />
-        <Route path="/teste-de-risco/resultado" element={<ResultadoTeste />} />
+        <Route path="/meu-espaco-seguro" element={<MeuEspacoSeguro />} />
+        <Route path="/assistente" element={<AssistenteVirtual />} />
+
+
 
 
         {/* Autenticação */}
