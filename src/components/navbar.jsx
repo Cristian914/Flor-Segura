@@ -25,7 +25,7 @@ export default function Navbar() {
             <Link to="/meu-espaco-seguro" className="hover:text-gray-200">Espaço Seguro</Link>
             <Link to="/entenda-a-violencia" className="hover:text-gray-200">Entenda a Violência</Link>
             <Link to="/sobre" className="hover:text-gray-200">Sobre</Link>
-            <Link to="/assistente" className="hover:text-gray-200">Companheiro</Link>
+            <Link to="/assistente" className="hover:text-gray-200">Chat Seguro</Link>
 
           </div>
 

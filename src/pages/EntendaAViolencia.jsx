@@ -13,295 +13,243 @@ import {
 } from "lucide-react";
 import Navbar from "../components/Navbar";
 
-
-const Violencia = () => {
+export default function Violencia() {
   const violencias = [
     {
       id: 1,
-      icon: <Brain size={80} />,
+      icon: <Brain size={55} />,
       tipo: "Psicológica",
-      cor: "from-purple-600 to-pink-500",
+      cor: "from-purple-500 to-pink-400",
       descricao:
-        "A violência psicológica causa dano emocional, destrói a autoestima e busca controlar o comportamento da vítima.",
+        "A violência psicológica atua silenciosamente, afetando emoções, autoestima e autonomia da vítima.",
       exemplos: [
-        "Ameaças e humilhações constantes",
-        "Isolamento social e vigilância",
-        "Manipulação, gaslighting e chantagens",
-        "Controle de decisões pessoais",
+        "Humilhações e xingamentos",
+        "Manipulação (gaslighting)",
+        "Ameaças emocionais",
+        "Isolamento social",
       ],
     },
     {
       id: 2,
-      icon: <HandFist size={80} />,
+      icon: <HandFist size={55} />,
       tipo: "Física",
-      cor: "from-red-600 to-orange-500",
+      cor: "from-red-500 to-orange-400",
       descricao:
-        "A violência física é qualquer ação que cause dor, lesões ou sofrimento corporal, mesmo que não deixe marcas visíveis.",
-      exemplos: [
-        "Tapas, empurrões, socos e chutes",
-        "Uso de objetos para agredir",
-        "Queimaduras, sufocamento ou ferimentos",
-        "Privação de sono, comida ou remédios",
-      ],
+        "Envolve qualquer agressão corporal, com ou sem marcas visíveis.",
+      exemplos: ["Socos e empurrões", "Queimaduras", "Agressões com objetos"],
     },
     {
       id: 3,
-      icon: <Heart size={80} />,
+      icon: <Heart size={55} />,
       tipo: "Sexual",
-      cor: "from-rose-600 to-fuchsia-500",
+      cor: "from-rose-500 to-fuchsia-500",
       descricao:
-        "A violência sexual ocorre quando há qualquer forma de coerção, assédio ou ato sexual sem consentimento.",
-      exemplos: [
-        "Estupro ou tentativa de estupro",
-        "Obrigar a manter relações contra a vontade",
-        "Controle sobre o corpo ou reprodução",
-        "Toques e comentários inapropriados",
-      ],
+        "A violência sexual ocorre quando não existe consentimento ou há coerção física ou psicológica.",
+      exemplos: ["Estupro", "Obrigar relações", "Assédio persistente"],
     },
     {
       id: 4,
-      icon: <Gem size={80} />,
+      icon: <Gem size={55} />,
       tipo: "Patrimonial",
-      cor: "from-emerald-600 to-teal-400",
+      cor: "from-emerald-500 to-teal-400",
       descricao:
-        "A violência patrimonial envolve o controle, destruição ou retenção de bens e recursos da vítima.",
-      exemplos: [
-        "Destruição de documentos e objetos pessoais",
-        "Controle de dinheiro e contas bancárias",
-        "Impedir o uso de bens ou moradia",
-        "Tomar pertences sem permissão",
-      ],
+        "Controle, retenção ou destruição de bens da vítima.",
+      exemplos: ["Tomar documentos", "Controlar dinheiro", "Destruir objetos"],
     },
     {
       id: 5,
-      icon: <FileText size={80} />,
+      icon: <FileText size={55} />,
       tipo: "Moral",
-      cor: "from-indigo-600 to-blue-500",
+      cor: "from-indigo-500 to-blue-400",
       descricao:
-        "A violência moral fere a honra e a imagem da vítima por meio de difamação, calúnia ou insultos públicos.",
-      exemplos: [
-        "Acusações falsas e humilhações",
-        "Exposição de intimidade",
-        "Falas ofensivas e constrangedoras",
-        "Desrespeito em público ou online",
-      ],
+        "Atinge a dignidade da vítima por meio de difamação ou insultos públicos.",
+      exemplos: ["Calúnias", "Exposição da vida privada"],
     },
     {
       id: 6,
-      icon: <Shield size={80} />,
+      icon: <Shield size={55} />,
       tipo: "Institucional",
-      cor: "from-gray-600 to-gray-400",
+      cor: "from-gray-500 to-gray-300",
       descricao:
-        "A violência institucional é praticada por agentes do Estado ou instituições ao negar direitos ou negligenciar atendimentos.",
-      exemplos: [
-        "Negar atendimento médico ou jurídico",
-        "Tratamento discriminatório em delegacias",
-        "Demora proposital em processos",
-        "Desrespeito de servidores públicos",
-      ],
+        "Ocorre quando instituições negam direitos ou atendimento adequado.",
+      exemplos: ["Negar atendimento", "Abuso de autoridade"],
     },
     {
       id: 7,
-      icon: <Eye size={80} />,
+      icon: <Eye size={55} />,
       tipo: "Digital",
       cor: "from-cyan-500 to-blue-400",
       descricao:
-        "A violência digital ocorre no ambiente online, por meio de ameaças, exposição íntima e perseguições virtuais.",
-      exemplos: [
-        "Divulgação de imagens íntimas",
-        "Ameaças e chantagens online",
-        "Rastreamento e controle digital",
-        "Fake news e difamação nas redes",
-      ],
+        "A violência digital envolve ataques, perseguição e exposição online.",
+      exemplos: ["Ameaças online", "Vazamento de fotos", "Controle digital"],
     },
   ];
-
 
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const [progress, setProgress] = useState(0);
-
 
   const nextSlide = () => {
     setIndex((prev) => (prev + 1) % violencias.length);
     setProgress(0);
   };
 
-
   const prevSlide = () => {
     setIndex((prev) => (prev - 1 + violencias.length) % violencias.length);
     setProgress(0);
   };
 
-
   useEffect(() => {
     if (paused) return;
-
-
-    const timer = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
+    const t = setInterval(() => {
+      setProgress((p) => {
+        if (p >= 100) {
           nextSlide();
           return 0;
         }
-        return prev + 1;
+        return p + 1;
       });
-    }, 50);
-
-
-    return () => clearInterval(timer);
+    }, 60);
+    return () => clearInterval(t);
   }, [paused, index]);
 
-
   const slideVariants = {
-    hiddenRight: { opacity: 0, x: 150, rotateY: -20 },
-    hiddenLeft: { opacity: 0, x: -150, rotateY: 20 },
+    hidden: { opacity: 0, y: 40, scale: 0.95 },
     visible: {
       opacity: 1,
-      x: 0,
-      rotateY: 0,
-      transition: { duration: 0.7, ease: "easeOut" },
+      y: 0,
+      scale: 1,
+      transition: { duration: 0.5, ease: "easeOut" },
     },
     exit: { opacity: 0, scale: 0.9 },
   };
 
-
   return (
-    <div className="bg-gradient-to-b from-[#F3E5F5] via-[#F8EAF6] to-[#EDE7F6] min-h-screen flex flex-col items-center text-center overflow-hidden text-[#4A148C] font-sans">
+    <div className="bg-gradient-to-b from-pink-100 to-pink-50 min-h-screen text-purple-900 font-sans">
       <Navbar />
 
-
-      {/* HEADER */}
-      <section className="w-full bg-gradient-to-r from-[#7B1FA2] to-[#BA68C8] py-24 px-6 md:px-16 text-white shadow-inner relative overflow-hidden">
+      {/* HERO — Estilo igual ao "Sobre" */}
+      <section className="px-6 md:px-20 py-24 text-center bg-gradient-to-br from-purple-600 to-purple-700 text-white rounded-b-[40px] shadow-xl">
         <motion.h1
-          initial={{ y: -40, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-5xl md:text-7xl font-extrabold drop-shadow-lg tracking-tight"
+          className="text-5xl md:text-7xl font-extrabold drop-shadow-xl"
         >
-          O que é Violência?
+          Entenda a Violência
         </motion.h1>
-
 
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 1 }}
-          className="text-lg md:text-2xl max-w-4xl mx-auto leading-relaxed mt-6 text-pink-50"
+          className="text-lg md:text-2xl mt-6 max-w-3xl mx-auto text-purple-100"
         >
-          A violência assume diferentes formas — física, psicológica, moral,
-          sexual, patrimonial, digital e até institucional.  
-          Compreender cada uma delas é o primeiro passo para combater e
-          proteger quem sofre.
+          Conheça de forma clara, visual e segura os tipos de violência — e como
+          identificá-los.
         </motion.p>
       </section>
 
+      {/* SEÇÃO TRIPLA ESTILO "SOBRE" */}
+      <section className="px-6 md:px-20 mt-20 grid md:grid-cols-3 gap-10 max-w-7xl mx-auto">
+        {[
+          {
+            titulo: "Reconhecer",
+            texto:
+              "Muitas violências começam de forma discreta. Entender sinais é o primeiro passo.",
+          },
+          {
+            titulo: "Informar",
+            texto:
+              "Educação e informação empoderam e ajudam mulheres a quebrar ciclos.",
+          },
+          {
+            titulo: "Agir",
+            texto:
+              "Identificar a violência permite buscar ajuda e garantir segurança.",
+          },
+        ].map((c, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: i * 0.2 }}
+            className="bg-white rounded-3xl p-10 shadow-lg border border-purple-100 hover:shadow-2xl transition"
+          >
+            <h3 className="text-2xl font-bold text-purple-800 mb-3">
+              {c.titulo}
+            </h3>
+            <p className="text-purple-700 text-base leading-relaxed">
+              {c.texto}
+            </p>
+          </motion.div>
+        ))}
+      </section>
 
-      {/* CARROSSEL */}
+      {/* CARROSSEL — Menor, arredondado e elegante */}
       <section
-        className="relative mt-20 mb-16 w-full max-w-7xl px-6 select-none"
+        className="relative w-full max-w-4xl mx-auto px-6 mt-24 mb-24 select-none"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
-        <motion.h2
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          className="text-4xl font-bold text-[#6A1B9A] mb-12"
-        >
+        <h2 className="text-4xl font-bold text-purple-800 mb-10 text-center">
           Tipos de Violência
-        </motion.h2>
+        </h2>
 
-
-        <div className="flex items-center justify-center gap-6">
+        <div className="flex items-center justify-center gap-3">
           <button
             onClick={prevSlide}
-            className="p-4 rounded-full bg-gradient-to-r from-[#AB47BC] to-[#8E24AA] text-white hover:scale-110 hover:shadow-lg hover:shadow-pink-400/40 transition-all"
+            className="p-4 rounded-full bg-purple-400 text-white shadow-md hover:scale-110 transition"
           >
-            <ChevronLeft size={28} />
+            <ChevronLeft size={26} />
           </button>
-
 
           <AnimatePresence mode="wait">
             <motion.div
               key={violencias[index].id}
               variants={slideVariants}
-              initial="hiddenRight"
+              initial="hidden"
               animate="visible"
               exit="exit"
-              className={`relative group w-full max-w-5xl rounded-3xl p-12 md:p-16 text-white shadow-2xl bg-gradient-to-br ${violencias[index].cor} border border-white/10 overflow-hidden`}
+              className={`w-full rounded-3xl p-10 text-white shadow-xl bg-gradient-to-br ${violencias[index].cor} relative overflow-hidden transition`}
             >
-              <div className="flex flex-col md:flex-row items-center gap-10 relative z-10">
-                <motion.div
-                  initial={{ scale: 0.8, rotate: -10, opacity: 0 }}
-                  animate={{ scale: 1, rotate: 0, opacity: 1 }}
-                  transition={{ duration: 0.6, type: "spring" }}
-                  className="bg-white/20 backdrop-blur-md p-6 rounded-full border border-white/30 shadow-inner"
-                >
+              <div className="flex flex-col items-center text-center gap-3">
+                <div className="p-5 bg-white/20 rounded-full border border-white/30">
                   {violencias[index].icon}
-                </motion.div>
-
-
-                <div className="text-left flex-1">
-                  <h3 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">
-                    {violencias[index].tipo}
-                  </h3>
-                  <p className="text-lg mb-6 text-white/90 leading-relaxed">
-                    {violencias[index].descricao}
-                  </p>
-
-
-                  <ul className="space-y-2 text-white/90">
-                    {violencias[index].exemplos.map((exemplo, i) => (
-                      <li key={i} className="flex items-center gap-3">
-                        <span className="w-3 h-3 rounded-full bg-white/70 shadow-md"></span>
-                        {exemplo}
-                      </li>
-                    ))}
-                  </ul>
                 </div>
+
+                <h3 className="text-3xl font-extrabold">
+                  {violencias[index].tipo}
+                </h3>
+                <p className="text-base text-white/90 max-w-md">
+                  {violencias[index].descricao}
+                </p>
+
+                <ul className="mt-4 space-y-1 text-white/90 text-left">
+                  {violencias[index].exemplos.map((ex, i) => (
+                    <li key={i} className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-white"></span>
+                      {ex}
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-
-              {/* Barra de progresso */}
               <motion.div
                 style={{ width: `${progress}%` }}
-                className="absolute bottom-0 left-0 h-1 bg-white/70 rounded-full transition-all duration-100"
-              ></motion.div>
+                className="absolute bottom-0 left-0 h-1 bg-white/70"
+              />
             </motion.div>
           </AnimatePresence>
 
-
           <button
             onClick={nextSlide}
-            className="p-4 rounded-full bg-gradient-to-r from-[#AB47BC] to-[#8E24AA] text-white hover:scale-110 hover:shadow-lg hover:shadow-pink-400/40 transition-all"
+            className="p-4 rounded-full bg-purple-400 text-white shadow-md hover:scale-110 transition"
           >
-            <ChevronRight size={28} />
+            <ChevronRight size={26} />
           </button>
-        </div>
-
-
-        {/* Indicadores */}
-        <div className="flex justify-center gap-3 mt-10">
-          {violencias.map((_, i) => (
-            <motion.span
-              key={i}
-              animate={{
-                scale: i === index ? 1.4 : 1,
-                backgroundColor: i === index ? "#6A1B9A" : "#E1BEE7",
-              }}
-              transition={{ duration: 0.3 }}
-              className="w-4 h-4 rounded-full shadow-inner"
-            ></motion.span>
-          ))}
         </div>
       </section>
     </div>
   );
-};
-
-
-export default Violencia;
-
-
- 
+}
