@@ -12,30 +12,44 @@ const RegisterPage = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
  
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     setError('');
     setLoading(true);
- 
+  
     if (password !== confirmPassword) {
       setError('As senhas não coincidem.');
       setLoading(false);
       return;
     }
- 
-    const existingUser = localStorage.getItem(email);
-    if (existingUser) {
-      setError('E-mail já cadastrado.');
-      setLoading(false);
-      return;
+  
+    try {
+      const response = await fetch("http://localhost:3001/auth/register", {
+              method: "POST",
+              headers: {
+              "Content-Type": "application/json",
+               },
+             body: JSON.stringify({ name, email, password }),
+});
+
+  
+      const data = await response.json();
+  
+      if (!response.ok) {
+        setError(data.error || "Erro ao criar conta.");
+        setLoading(false);
+        return;
+      }
+  
+      navigate("/login");
+  
+    } catch (error) {
+      setError("Erro ao conectar ao servidor.");
     }
- 
-    const newUser = { name, email, password };
-    localStorage.setItem(email, JSON.stringify(newUser));
- 
-    navigate('/login');
+  
     setLoading(false);
   };
+  
  
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-300 to-purple-100">
