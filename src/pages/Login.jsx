@@ -1,13 +1,18 @@
 // LoginPage.jsx
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { motion } from "framer-motion";
 import { FaUser, FaLock } from "react-icons/fa";
 import LogoHome from "../assets/imagens/logohome.png";
 import { useNavigate } from "react-router-dom";
 import { loginRequest } from "../services/api";
+import { AuthContext } from "../context/AuthContext";
 
 const LoginPage = () => {
   const navigate = useNavigate();
+
+  // ⬅️ Agora o hook está no lugar certo!
+  const { login } = useContext(AuthContext);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -21,13 +26,11 @@ const LoginPage = () => {
     try {
       const data = await loginRequest(email, password);
 
-      // salvar token e dados
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data));
+      // Salva usuário no AuthContext
+      login(data);
 
       navigate("/home");
     } catch (err) {
-      // mensagem clara para o usuário
       setError(err.message || "Erro ao fazer login.");
     }
 

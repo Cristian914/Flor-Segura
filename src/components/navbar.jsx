@@ -1,15 +1,30 @@
-import { useState } from "react";
-import { Link } from "react-router-dom"; // se estiver usando react-router
-import { FaUser } from "react-icons/fa"; // ícone de usuário
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { FaUser } from "react-icons/fa";
 import Logo from "../assets/imagens/logo.png";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLogged, setIsLogged] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsLogged(!!token);
+  }, []);
+
+  function handleLogout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setIsLogged(false);
+    navigate("/login");
+  }
 
   return (
     <nav className="bg-purple-700 text-white fixed top-0 left-0 w-full z-50 shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
+
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link to="/">
@@ -26,14 +41,29 @@ export default function Navbar() {
             <Link to="/entenda-a-violencia" className="hover:text-gray-200">Entenda a Violência</Link>
             <Link to="/sobre" className="hover:text-gray-200">Sobre</Link>
             <Link to="/assistente" className="hover:text-gray-200">Chat Seguro</Link>
-
           </div>
 
-          {/* Ícone usuário e botão mobile */}
+          {/* Login / Logout */}
           <div className="flex items-center space-x-4">
-            <Link to="/login" className="text-white hover:text-gray-200">
-              <FaUser size={24} />
-            </Link>
+
+            {/* 🔐 SE NÃO ESTIVER LOGADO */}
+            {!isLogged && (
+              <Link to="/login" className="text-white hover:text-gray-200">
+                <FaUser size={24} />
+              </Link>
+            )}
+
+            {/* ✅ SE ESTIVER LOGADO → botão roxo */}
+            {isLogged && (
+              <button
+                onClick={handleLogout}
+                className="bg-purple-600 px-4 py-2 rounded-lg hover:bg-purple-700 transition"
+              >
+                Sair
+              </button>
+            )}
+
+            {/* Botão mobile */}
             <div className="md:hidden">
               <button
                 onClick={() => setIsOpen(!isOpen)}
@@ -60,10 +90,19 @@ export default function Navbar() {
           <Link to="/" className="block px-4 py-2 hover:bg-purple-800">Home</Link>
           <Link to="/preciso-de-ajuda" className="block px-4 py-2 hover:bg-purple-800">Preciso de Ajuda</Link>
           <Link to="/mapa-de-apoio" className="block px-4 py-2 hover:bg-purple-800">Mapa de Apoio</Link>
-          <Link to="/teste-de-risco" className="block px-4 py-2 hover:bg-purple-800">Teste de risco</Link>
           <Link to="/entenda-a-violencia" className="block px-4 py-2 hover:bg-purple-800">Entenda a Violência</Link>
           <Link to="/fale-com-alguem" className="block px-4 py-2 hover:bg-purple-800">Fale com Alguém</Link>
           <Link to="/sobre" className="block px-4 py-2 hover:bg-purple-800">Sobre</Link>
+
+          {/* Logout mobile (roxo escuro também) */}
+          {isLogged && (
+            <button
+              onClick={handleLogout}
+              className="block w-full text-left px-4 py-2 bg-purple-600 hover:bg-purple-700 transition"
+            >
+              Sair
+            </button>
+          )}
         </div>
       )}
     </nav>
