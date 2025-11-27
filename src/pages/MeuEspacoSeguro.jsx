@@ -7,13 +7,14 @@ export default function MeuEspacoSeguro() {
   const [editando, setEditando] = useState(null);
   const [filtroMes, setFiltroMes] = useState("");
   const [busca, setBusca] = useState("");
+  const [isPublic, setIsPublic] = useState(false); // 🔥 NOVO
 
-  const API_URL = "http://localhost:3001/notes"; 
+  const API_URL = "http://localhost:3001/notes";
   const token = localStorage.getItem("token");
 
-  // ================================
+  // ======================================
   // 🔹 Carregar notas do backend
-  // ================================
+  // ======================================
   useEffect(() => {
     if (!token) return;
 
@@ -36,54 +37,92 @@ export default function MeuEspacoSeguro() {
       .catch(() => console.log("Erro ao carregar notas"));
   }, []);
 
-  // ================================
-  // 🔹 Criar ou editar nota
-  // ================================
-  const salvar = () => {
+  // ======================================
+  // 🔹 Salvar (CRIAR OU EDITAR)
+  // ======================================
+  const salvar = async () => {
     if (!texto.trim()) {
       alert("Digite algo antes de salvar 💜");
       return;
     }
 
-    // EDITAR LOCALMENTE — SOMENTE NO FRONT
+    // ===========================
+    // 🔧 EDITAR NOTA (PUT)
+    // ===========================
     if (editando) {
-      alert("Para edição com backend, você precisa implementar UPDATE no servidor.");
+      try {
+        await fetch(`${API_URL}/${editando}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ content: texto }),
+        });
+
+        setAnotacoes(
+          anotacoes.map((n) =>
+            n.id === editando ? { ...n, conteudo: texto } : n
+          )
+        );
+
+        alert("✏️ Anotação atualizada!");
+        setTexto("");
+        setEditando(null);
+        setIsPublic(false);
+      } catch {
+        alert("Erro ao atualizar anotação.");
+      }
       return;
     }
 
-    // ================================
-    // 🔹 Criar nota no backend
-    // ================================
-    fetch(API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ content: texto }),
-    })
-      .then((res) => res.json())
-      .then((nova) => {
-        const obj = {
-          id: nova.id,
-          conteudo: nova.content,
-          dataCompleta: new Date(),
-          data: new Date().toLocaleDateString("pt-BR", {
-            day: "2-digit",
-            month: "long",
-            year: "numeric",
-          }),
-        };
-        setAnotacoes([obj, ...anotacoes]);
-        alert("💾 Anotação salva com segurança!");
-        setTexto("");
-      })
-      .catch(() => alert("Erro ao salvar anotação."));
+    // ===========================
+    // 🆕 CRIAR NOTA (POST)
+    // ===========================
+    try {
+      const res = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ content: texto }),
+      });
+
+      const nova = await res.json();
+
+      // 🔥 PUBLICAR SE ESTIVER MARCADO COMO PÚBLICA
+      if (isPublic) {
+        await fetch(`http://localhost:3001/publications/${nova.id}`, {
+          method: "POST",
+          headers: { Authorization: `Bearer ${token}` },
+        });
+      }
+
+      const obj = {
+        id: nova.id,
+        conteudo: nova.content,
+        dataCompleta: new Date(),
+        data: new Date().toLocaleDateString("pt-BR", {
+          day: "2-digit",
+          month: "long",
+          year: "numeric",
+        }),
+      };
+
+      setAnotacoes([obj, ...anotacoes]);
+
+      alert("💾 Anotação salva!");
+      setTexto("");
+      setIsPublic(false);
+    } catch {
+      alert("Erro ao salvar anotação.");
+    }
   };
 
-  // ================================
-  // 🔹 Apagar anotação do backend
-  // ================================
+  // ======================================
+  // 🔹 Apagar anotação
+  // ======================================
   const apagar = (id) => {
     if (!window.confirm("Deseja realmente apagar esta anotação?")) return;
 
@@ -91,25 +130,15 @@ export default function MeuEspacoSeguro() {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
     })
-      .then((res) => res.json())
       .then(() => {
         setAnotacoes(anotacoes.filter((nota) => nota.id !== id));
       })
       .catch(() => alert("Erro ao apagar anotação."));
   };
 
-  // ================================
-  // 🔹 Modo seguro — limpa TUDO do banco?
-  // ================================
-  const limparTudo = () => {
-    alert(
-      "O modo seguro não pode apagar tudo no backend sem autorização.\nSe quiser implementar, preciso criar uma rota DELETE /notes/all"
-    );
-  };
-
-  // ================================
-  // 🔹 Filtro combinado
-  // ================================
+  // ======================================
+  // 🔹 Filtros
+  // ======================================
   const anotacoesFiltradas = anotacoes.filter((nota) => {
     const mesNota = new Date(nota.dataCompleta).getMonth() + 1;
     const coincideMes = filtroMes ? mesNota === parseInt(filtroMes) : true;
@@ -131,6 +160,14 @@ export default function MeuEspacoSeguro() {
           Aqui você pode escrever, editar e guardar suas anotações com segurança.
         </p>
 
+        {/* 🔥 Botão ir para público */}
+        <button
+          onClick={() => (window.location.href = "/publico")}
+          className="mb-6 bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-full shadow"
+        >
+          🌍 Ver Notas Públicas
+        </button>
+
         {/* Campo de anotação */}
         <textarea
           value={texto}
@@ -140,6 +177,18 @@ export default function MeuEspacoSeguro() {
             editando ? "✏️ Edite sua anotação..." : "✍️ Escreva aqui sua anotação..."
           }
         />
+
+        {/* 🔥 Checkbox tornar público */}
+        <div className="w-full max-w-2xl flex items-center gap-2 mb-4">
+          <input
+            type="checkbox"
+            checked={isPublic}
+            onChange={() => setIsPublic(!isPublic)}
+          />
+          <label className="text-purple-700 font-semibold">
+            Tornar esta anotação pública
+          </label>
+        </div>
 
         {/* Botões */}
         <div className="flex flex-wrap gap-4 mb-6 justify-center">
@@ -151,10 +200,14 @@ export default function MeuEspacoSeguro() {
           </button>
 
           <button
-            onClick={limparTudo}
-            className="bg-red-500 hover:bg-red-600 text-white font-bold px-6 py-3 rounded-full transition"
+            onClick={() => {
+              setTexto("");
+              setEditando(null);
+              setIsPublic(false);
+            }}
+            className="bg-gray-400 hover:bg-gray-500 text-white font-bold px-6 py-3 rounded-full transition"
           >
-            🧹 Modo Seguro
+            Cancelar
           </button>
         </div>
 
@@ -168,23 +221,16 @@ export default function MeuEspacoSeguro() {
               className="border border-purple-300 rounded-xl px-4 py-2 text-purple-700 focus:ring-2 focus:ring-purple-400"
             >
               <option value="">Todos</option>
-              <option value="1">Janeiro</option>
-              <option value="2">Fevereiro</option>
-              <option value="3">Março</option>
-              <option value="4">Abril</option>
-              <option value="5">Maio</option>
-              <option value="6">Junho</option>
-              <option value="7">Julho</option>
-              <option value="8">Agosto</option>
-              <option value="9">Setembro</option>
-              <option value="10">Outubro</option>
-              <option value="11">Novembro</option>
-              <option value="12">Dezembro</option>
+              {[...Array(12)].map((_, i) => (
+                <option key={i + 1} value={i + 1}>
+                  {new Date(0, i).toLocaleString("pt-BR", { month: "long" })}
+                </option>
+              ))}
             </select>
           </div>
 
           <div className="flex items-center gap-2">
-            <label className="text-purple-700 font-semibold">Buscar palavra:</label>
+            <label className="text-purple-700 font-semibold">Buscar:</label>
             <input
               type="text"
               value={busca}

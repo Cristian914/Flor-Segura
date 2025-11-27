@@ -29,7 +29,7 @@ const LoginPage = () => {
       // Salva usuário no AuthContext
       login(data);
 
-      navigate("/home");
+      navigate("/");
     } catch (err) {
       setError(err.message || "Erro ao fazer login.");
     }

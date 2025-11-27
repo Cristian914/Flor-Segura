@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import { AuthProvider } from "./context/AuthContext"; // ⬅️ IMPORTANTE
+import { AuthProvider } from "./context/AuthContext"; // ⬅️ CONTEXTO GLOBAL
 
 import Home from "./pages/home";
 import PrecisoDeAjuda from "./pages/PrecisoDeAjuda.jsx";
@@ -14,10 +14,13 @@ import Register from "./pages/Register";
 import MeuEspacoSeguro from "./pages/MeuEspacoSeguro";
 import AssistenteVirtual from "./pages/AssistenteVirtual";
 
+// 🟣 Páginas públicas novas
+import Publico from "./pages/Publico";
+import PublicoNota from "./pages/PublicoNota";
 
 function App() {
   return (
-    <AuthProvider> {/* ⬅️ AGORA TODA A APLICAÇÃO TEM CONTEXTO DE LOGIN */}
+    <AuthProvider>
       <Router>
         <Routes>
           {/* Páginas principais */}
@@ -29,14 +32,18 @@ function App() {
           <Route path="/meu-espaco-seguro" element={<MeuEspacoSeguro />} />
           <Route path="/assistente" element={<AssistenteVirtual />} />
 
+          {/* Público (Mural + Comentários) */}
+          <Route path="/publico" element={<Publico />} />
+          <Route path="/publico/:id" element={<PublicoNota />} />
+
           {/* Autenticação */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
-          {/* Outras páginas */}
+          {/* Sobre */}
           <Route path="/sobre" element={<Sobre />} />
 
-          {/* Página 404 */}
+          {/* 404 */}
           <Route
             path="*"
             element={
