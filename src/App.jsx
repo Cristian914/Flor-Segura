@@ -11,7 +11,6 @@ import RedeDeApoio from "./pages/RedeDeApoio";
 import Sobre from "./pages/Sobre";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Inicio from "./pages/Inicio";
 import MeuEspacoSeguro from "./pages/MeuEspacoSeguro";
 import AssistenteVirtual from "./pages/AssistenteVirtual";
 
@@ -21,12 +20,8 @@ function App() {
     <AuthProvider> {/* ⬅️ AGORA TODA A APLICAÇÃO TEM CONTEXTO DE LOGIN */}
       <Router>
         <Routes>
-
-          {/* Página inicial */}
-          <Route path="/" element={<Inicio />} />
-
           {/* Páginas principais */}
-          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/preciso-de-ajuda" element={<PrecisoDeAjuda />} />
           <Route path="/mapa-de-apoio" element={<MapaDeApoio />} />
           <Route path="/entenda-a-violencia" element={<EntendaAViolencia />} />
