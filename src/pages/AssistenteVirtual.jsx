@@ -149,7 +149,7 @@ export default function AssistenteVirtual() {
 
             <div className="flex items-center gap-3">
               <button
-                onClick={() => (window.location.href = "/preciso-ajuda")}
+                onClick={() => (window.location.href = "/preciso-de-ajuda")}
                 className="hidden sm:inline-flex items-center gap-2 bg-[#BA68C8] hover:bg-[#9b47b8] text-white px-4 py-2 rounded-full shadow-sm font-semibold transition"
               >
                 Preciso de ajuda agora
