@@ -9,24 +9,41 @@ export default function PublicoNota() {
   const [novoComentario, setNovoComentario] = useState("");
 
   useEffect(() => {
+    // PEGAR A NOTA
     fetch(`http://localhost:3001/publications/${id}`)
       .then((res) => res.json())
       .then((data) => setNota(data));
-    
-    fetch(`http://localhost:3001/publications/${id}/comments`)
+
+    // PEGAR COMENTÁRIOS
+    fetch(`http://localhost:3001/comments/${id}`)
       .then((res) => res.json())
       .then((data) => setComentarios(data));
   }, [id]);
 
   function enviarComentario() {
-    fetch(`http://localhost:3001/publications/${id}/comments`, {
+    const token = localStorage.getItem("token");
+
+    fetch(`http://localhost:3001/comments`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ content: novoComentario }),
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`   // 🔥 TOKEN AQUI
+      },
+      body: JSON.stringify({
+        public_note_id: id,
+        comment: novoComentario
+      }),
     })
       .then((res) => res.json())
       .then((data) => {
+        if (data.error) {
+          console.error("Erro ao comentar:", data.error);
+          return;
+        }
+
+        // adiciona o novo comentário na tela
         setComentarios([...comentarios, data]);
+
         setNovoComentario("");
       });
   }
@@ -58,12 +75,11 @@ export default function PublicoNota() {
               className="bg-purple-50 border border-purple-200 rounded-xl p-3 mb-3"
             >
               <p className="text-purple-900 font-semibold">{c.author}</p>
-              <p className="text-purple-700">{c.content}</p>
+              <p className="text-purple-700">{c.comment}</p>
             </div>
           ))
         )}
 
-        {/* Caixa de comentário */}
         <div className="mt-6">
           <textarea
             value={novoComentario}
@@ -71,10 +87,13 @@ export default function PublicoNota() {
             placeholder="Escreva seu comentário..."
             className="w-full p-3 border border-purple-300 rounded-xl focus:outline-purple-600"
           ></textarea>
-
           <button
+            disabled={!novoComentario.trim()}
             onClick={enviarComentario}
-            className="mt-2 bg-purple-700 text-white px-4 py-2 rounded-xl hover:bg-purple-800 transition"
+            className={`mt-2 px-4 py-2 rounded-xl transition text-white
+              ${!novoComentario.trim() 
+                ? "bg-purple-300 cursor-not-allowed" 
+                : "bg-purple-700 hover:bg-purple-800"}`}
           >
             Comentar
           </button>

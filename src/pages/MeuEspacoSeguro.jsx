@@ -151,122 +151,139 @@ export default function MeuEspacoSeguro() {
   return (
     <>
       <Navbar />
-
-      <div className="min-h-screen bg-gradient-to-b from-purple-50 via-purple-100 to-white pt-28 px-6 flex flex-col items-center">
-        <h1 className="text-4xl font-extrabold text-purple-900 mb-4">
-          Meu Espaço Seguro 💜
-        </h1>
-        <p className="text-purple-700 text-center mb-6 max-w-2xl">
-          Aqui você pode escrever, editar e guardar suas anotações com segurança.
-        </p>
-
-        {/* 🔥 Botão ir para público */}
-        <button
-          onClick={() => (window.location.href = "/publico")}
-          className="mb-6 bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-full shadow"
-        >
-          🌍 Ver Notas Públicas
-        </button>
-
-        {/* Campo de anotação */}
-        <textarea
-          value={texto}
-          onChange={(e) => setTexto(e.target.value)}
-          className="w-full max-w-2xl h-40 border border-purple-300 rounded-2xl p-4 text-purple-900 focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm mb-4"
-          placeholder={
-            editando ? "✏️ Edite sua anotação..." : "✍️ Escreva aqui sua anotação..."
-          }
-        />
-
-        {/* 🔥 Checkbox tornar público */}
-        <div className="w-full max-w-2xl flex items-center gap-2 mb-4">
-          <input
-            type="checkbox"
-            checked={isPublic}
-            onChange={() => setIsPublic(!isPublic)}
+  
+      <div className="min-h-screen bg-gradient-to-b from-purple-50 via-purple-100 to-white pt-28 px-4 flex flex-col items-center">
+  
+        {/* Título da Página */}
+        <div className="text-center mb-10 animate-fadeIn">
+          <h1 className="text-4xl font-extrabold text-purple-900 drop-shadow-sm">
+            Meu Espaço Seguro 💜
+          </h1>
+          <p className="text-purple-700 mt-2 max-w-xl mx-auto">
+            Um lugar protegido para você registrar e organizar seus pensamentos.
+          </p>
+  
+          <button
+            onClick={() => (window.location.href = "/publico")}
+            className="mt-6 bg-purple-600 hover:bg-purple-700 text-white px-7 py-3 rounded-full shadow-md transition-all hover:scale-105"
+          >
+            🌍 Ver Notas Públicas
+          </button>
+        </div>
+  
+        {/* Card de Criar Anotação */}
+        <div className="bg-white shadow-xl border border-purple-200 rounded-2xl p-6 max-w-3xl w-full mb-10 animate-slideUp">
+  
+          <h2 className="text-xl font-bold text-purple-900 mb-3 flex items-center gap-2">
+            ✍️ Criar nova anotação
+          </h2>
+  
+          <textarea
+            value={texto}
+            onChange={(e) => setTexto(e.target.value)}
+            className="w-full h-40 border border-purple-300 rounded-xl p-4 text-purple-900 focus:outline-none focus:ring-2 focus:ring-purple-400 shadow-sm mb-4"
+            placeholder={editando ? "✏️ Editando anotação..." : "Escreva aqui com tranquilidade..."}
           />
-          <label className="text-purple-700 font-semibold">
-            Tornar esta anotação pública
-          </label>
-        </div>
-
-        {/* Botões */}
-        <div className="flex flex-wrap gap-4 mb-6 justify-center">
-          <button
-            onClick={salvar}
-            className="bg-purple-600 hover:bg-purple-700 text-white font-bold px-6 py-3 rounded-full transition"
-          >
-            {editando ? "Salvar Edição" : "Salvar Anotação"}
-          </button>
-
-          <button
-            onClick={() => {
-              setTexto("");
-              setEditando(null);
-              setIsPublic(false);
-            }}
-            className="bg-gray-400 hover:bg-gray-500 text-white font-bold px-6 py-3 rounded-full transition"
-          >
-            Cancelar
-          </button>
-        </div>
-
-        {/* Filtros */}
-        <div className="flex flex-wrap gap-4 mb-8 justify-center items-center">
-          <div className="flex items-center gap-2">
-            <label className="text-purple-700 font-semibold">Filtrar por mês:</label>
-            <select
-              value={filtroMes}
-              onChange={(e) => setFiltroMes(e.target.value)}
-              className="border border-purple-300 rounded-xl px-4 py-2 text-purple-700 focus:ring-2 focus:ring-purple-400"
-            >
-              <option value="">Todos</option>
-              {[...Array(12)].map((_, i) => (
-                <option key={i + 1} value={i + 1}>
-                  {new Date(0, i).toLocaleString("pt-BR", { month: "long" })}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <label className="text-purple-700 font-semibold">Buscar:</label>
+  
+          <div className="flex items-center gap-2 mb-4">
             <input
-              type="text"
-              value={busca}
-              onChange={(e) => setBusca(e.target.value)}
-              placeholder="Ex: ajuda, casa..."
-              className="border border-purple-300 rounded-xl px-4 py-2 text-purple-700 focus:ring-2 focus:ring-purple-400"
+              type="checkbox"
+              checked={isPublic}
+              onChange={() => setIsPublic(!isPublic)}
             />
+            <label className="text-purple-700 font-medium">
+              Tornar esta anotação pública
+            </label>
+          </div>
+  
+          <div className="flex gap-4 justify-end">
+            <button
+              onClick={() => {
+                setTexto("");
+                setEditando(null);
+                setIsPublic(false);
+              }}
+              className="px-6 py-2 bg-gray-300 hover:bg-gray-400 text-gray-800 rounded-full font-medium transition-all"
+            >
+              Cancelar
+            </button>
+  
+            <button
+              onClick={salvar}
+              className="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-full font-semibold shadow-md transition-all hover:scale-105"
+            >
+              {editando ? "Salvar Edição" : "Salvar Anotação"}
+            </button>
           </div>
         </div>
-
-        {/* Cards */}
-        <div className="grid gap-4 w-full max-w-3xl">
+  
+        {/* Filtros */}
+        <div className="bg-white border border-purple-200 shadow-md rounded-2xl p-5 max-w-3xl w-full mb-10 animate-slideUp delay-150">
+          <h2 className="text-lg font-bold text-purple-900 mb-4 flex items-center gap-2">
+            🔎 Filtrar anotações
+          </h2>
+  
+          <div className="flex flex-wrap gap-5 sm:justify-between justify-center">
+  
+            <div className="flex flex-col">
+              <label className="text-purple-700 mb-1 font-medium">Filtrar por mês:</label>
+              <select
+                value={filtroMes}
+                onChange={(e) => setFiltroMes(e.target.value)}
+                className="border border-purple-300 rounded-xl px-4 py-2 text-purple-800 focus:ring-2 focus:ring-purple-400"
+              >
+                <option value="">Todos</option>
+                {[...Array(12)].map((_, i) => (
+                  <option key={i + 1} value={i + 1}>
+                    {new Date(0, i).toLocaleString("pt-BR", { month: "long" })}
+                  </option>
+                ))}
+              </select>
+            </div>
+  
+            <div className="flex flex-col">
+              <label className="text-purple-700 mb-1 font-medium">Buscar:</label>
+              <input
+                type="text"
+                value={busca}
+                onChange={(e) => setBusca(e.target.value)}
+                placeholder="Ex: ajuda, casa..."
+                className="border border-purple-300 rounded-xl px-4 py-2 text-purple-800 focus:ring-2 focus:ring-purple-400"
+              />
+            </div>
+          </div>
+        </div>
+  
+        {/* Lista de Anotações */}
+        <div className="grid gap-5 max-w-3xl w-full animate-fadeIn delay-300">
+  
           {anotacoesFiltradas.length === 0 ? (
-            <p className="text-purple-600 text-center italic">
+            <p className="text-purple-700 text-center italic">
               Nenhuma anotação encontrada 💬
             </p>
           ) : (
             anotacoesFiltradas.map((nota) => (
               <div
                 key={nota.id}
-                className="bg-white shadow-md rounded-2xl p-5 border border-purple-200 hover:shadow-lg transition"
+                className="bg-white border border-purple-200 p-5 rounded-2xl shadow-lg hover:shadow-xl transition-all hover:scale-[1.01]"
               >
-                <div className="flex justify-between items-center mb-2">
-                  <h3 className="text-lg font-bold text-purple-800">
-                    📝 Minha Anotação — {nota.data}
+                <div className="flex justify-between items-center mb-3">
+                  <h3 className="text-lg font-bold text-purple-900 flex items-center gap-2">
+                    📝 {nota.data}
                   </h3>
-                  <div className="flex gap-2">
+  
+                  <div className="flex gap-3">
                     <button
                       onClick={() => {
                         setTexto(nota.conteudo);
                         setEditando(nota.id);
+                        window.scrollTo({ top: 0, behavior: "smooth" });
                       }}
                       className="text-blue-600 hover:text-blue-800 font-semibold"
                     >
                       Editar
                     </button>
+  
                     <button
                       onClick={() => apagar(nota.id)}
                       className="text-red-600 hover:text-red-800 font-semibold"
@@ -275,17 +292,18 @@ export default function MeuEspacoSeguro() {
                     </button>
                   </div>
                 </div>
-
-                <p className="text-purple-700 whitespace-pre-wrap">
+  
+                <p className="text-purple-700 whitespace-pre-wrap leading-relaxed">
                   {nota.conteudo}
                 </p>
               </div>
             ))
           )}
+  
         </div>
-
-        <p className="text-sm text-purple-500 mt-6 max-w-2xl text-center">
-          Dica: pressione <strong>ESC</strong> para sair rapidamente para uma página neutra.
+  
+        <p className="text-sm text-purple-500 mt-10 text-center">
+          Pressione <strong>ESC</strong> para sair rapidamente para uma página neutra.
         </p>
       </div>
     </>
