@@ -17,7 +17,7 @@ import MulherImg from "../assets/imagens/mulher.png";
 
 export default function Sobre() {
   return (
-    <div className="bg-gradient-to-b from-pink-100 to-pink-50 min-h-screen text-purple-900 font-sans">
+    <div className="bg-gradient-to from-pink-100 to-pink-50 min-h-screen text-purple-900 font-sans">
       <Navbar />
 
       <main className="pt-28 px-6 md:px-20 text-center max-w-6xl mx-auto">
