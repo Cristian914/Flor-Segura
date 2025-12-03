@@ -12,12 +12,14 @@ export default function PublicoNota() {
     // PEGAR A NOTA
     fetch(`http://localhost:3001/publications/${id}`)
       .then((res) => res.json())
-      .then((data) => setNota(data));
+      .then((data) => setNota(data))
+      .catch(() => console.error("Erro ao carregar publicação"));
 
     // PEGAR COMENTÁRIOS
     fetch(`http://localhost:3001/comments/${id}`)
       .then((res) => res.json())
-      .then((data) => setComentarios(data));
+      .then((data) => setComentarios(data))
+      .catch(() => console.error("Erro ao carregar comentários"));
   }, [id]);
 
   function enviarComentario() {
@@ -27,11 +29,11 @@ export default function PublicoNota() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`   // 🔥 TOKEN AQUI
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        public_note_id: id,
-        comment: novoComentario
+        public_note_id: id, // ENVIA O ID CORRETO
+        comment: novoComentario,
       }),
     })
       .then((res) => res.json())
@@ -41,11 +43,12 @@ export default function PublicoNota() {
           return;
         }
 
-        // adiciona o novo comentário na tela
-        setComentarios([...comentarios, data]);
+        // Adiciona o novo comentário na lista
+        setComentarios([data, ...comentarios]);
 
         setNovoComentario("");
-      });
+      })
+      .catch(() => console.error("Falha ao enviar comentário"));
   }
 
   if (!nota) return <p>Carregando...</p>;
@@ -87,13 +90,16 @@ export default function PublicoNota() {
             placeholder="Escreva seu comentário..."
             className="w-full p-3 border border-purple-300 rounded-xl focus:outline-purple-600"
           ></textarea>
+
           <button
             disabled={!novoComentario.trim()}
             onClick={enviarComentario}
             className={`mt-2 px-4 py-2 rounded-xl transition text-white
-              ${!novoComentario.trim() 
-                ? "bg-purple-300 cursor-not-allowed" 
-                : "bg-purple-700 hover:bg-purple-800"}`}
+              ${
+                !novoComentario.trim()
+                  ? "bg-purple-300 cursor-not-allowed"
+                  : "bg-purple-700 hover:bg-purple-800"
+              }`}
           >
             Comentar
           </button>
