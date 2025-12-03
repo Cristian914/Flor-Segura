@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { AuthProvider } from "./context/AuthContext"; // ⬅️ CONTEXTO GLOBAL
 
-import Home from "./pages/home";
+import Home from "./pages/Home";
 import PrecisoDeAjuda from "./pages/PrecisoDeAjuda.jsx";
 import MapaDeApoio from "./pages/MapaDeApoio";
 import EntendaAViolencia from "./pages/EntendaAViolencia";
