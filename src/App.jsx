@@ -43,7 +43,7 @@ function App() {
           {/* Sobre */}
           <Route path="/sobre" element={<Sobre />} />
 
-          {/* 404 */}
+          {/* 4004 */}
           <Route
             path="*"
             element={
