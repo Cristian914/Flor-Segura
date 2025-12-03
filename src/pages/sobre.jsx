@@ -15,7 +15,7 @@ import { GiLotusFlower } from "react-icons/gi";
 
 import MulherImg from "../assets/imagens/mulher.png";
 
-export default function Sobre() {
+export default function Sobre () {
   return (
     <div className="bg-gradient-to from-pink-100 to-pink-50 min-h-screen text-purple-900 font-sans">
       <Navbar />
