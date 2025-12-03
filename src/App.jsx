@@ -8,7 +8,7 @@ import PrecisoDeAjuda from "./pages/PrecisoDeAjuda.jsx";
 import MapaDeApoio from "./pages/MapaDeApoio";
 import EntendaAViolencia from "./pages/EntendaAViolencia";
 import RedeDeApoio from "./pages/RedeDeApoio";
-import Sobre from "./pages/Sobre2";
+import Sobre from "./pages/Sobre1";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import MeuEspacoSeguro from "./pages/MeuEspacoSeguro";
