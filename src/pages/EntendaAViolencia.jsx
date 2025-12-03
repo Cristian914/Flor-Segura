@@ -11,7 +11,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navbar";
 
 export default function Violencia() {
   const violencias = [
