@@ -1,33 +1,65 @@
-const API_URL = "http://localhost:3001/auth";
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
+const API_URL = `${API_BASE_URL}/auth`;
+
+// Configuração padrão para requests
+const defaultHeaders = {
+  "Content-Type": "application/json",
+};
+
+// Função helper para fazer requests com tratamento de erro melhorado
+async function apiRequest(url, options = {}) {
+  const token = localStorage.getItem("token");
+  
+  const config = {
+    ...options,
+    headers: {
+      ...defaultHeaders,
+      ...(token && { Authorization: `Bearer ${token}` }),
+      ...options.headers,
+    },
+  };
+
+  try {
+    const res = await fetch(url, config);
+    
+    // Se não há conteúdo, retorna null
+    if (res.status === 204) return null;
+    
+    const data = await res.json().catch(() => ({}));
+    
+    if (!res.ok) {
+      throw new Error(data?.message || data?.error || `Erro ${res.status}`);
+    }
+    
+    return data;
+  } catch (error) {
+    if (error.name === "TypeError" && error.message.includes("fetch")) {
+      throw new Error("Erro de conexão. Verifique sua internet.");
+    }
+    throw error;
+  }
+}
 
 export async function loginRequest(email, password) {
-  const res = await fetch(`${API_URL}/login`, {
+  return apiRequest(`${API_URL}/login`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
   });
-
-  const data = await res.json().catch(() => null);
-
-  if (!res.ok) {
-    throw new Error(data?.error || "Erro ao fazer login.");
-  }
-
-  return data;
 }
 
 export async function registerRequest(name, email, password) {
-  const res = await fetch(`${API_URL}/register`, {
+  return apiRequest(`${API_URL}/register`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name, email, password }),
   });
+}
 
-  const data = await res.json().catch(() => null);
+// Função para validar token
+export async function validateToken() {
+  return apiRequest(`${API_URL}/validate`);
+}
 
-  if (!res.ok) {
-    throw new Error(data?.error || "Erro ao registrar.");
-  }
-
-  return data;
+// Função para refresh do token
+export async function refreshToken() {
+  return apiRequest(`${API_URL}/refresh`, { method: "POST" });
 }

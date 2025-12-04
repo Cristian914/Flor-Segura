@@ -1,7 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import { AuthProvider } from "./context/AuthContext"; // ⬅️ CONTEXTO GLOBAL
+import { AuthProvider, useAuth } from "./context/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Loading from "./components/Loading";
 
 import Home from "./pages/home";
 import PrecisoDeAjuda from "./pages/PrecisoDeAjuda.jsx";
@@ -18,18 +20,27 @@ import AssistenteVirtual from "./pages/AssistenteVirtual";
 import Publico from "./pages/Publico";
 import PublicoNota from "./pages/PublicoNota";
 
-function App() {
+function AppContent() {
+  const { loading } = useAuth();
+
+  if (loading) {
+    return <Loading message="Carregando Flor Segura..." />;
+  }
+
   return (
-    <AuthProvider>
-      <Router>
-        <Routes>
+    <Router>
+      <Routes>
           {/* Páginas principais */}
           <Route path="/" element={<Home />} />
           <Route path="/preciso-de-ajuda" element={<PrecisoDeAjuda />} />
           <Route path="/mapa-de-apoio" element={<MapaDeApoio />} />
           <Route path="/entenda-a-violencia" element={<EntendaAViolencia />} />
           <Route path="/rede-de-apoio" element={<RedeDeApoio />} />
-          <Route path="/meu-espaco-seguro" element={<MeuEspacoSeguro />} />
+          <Route path="/meu-espaco-seguro" element={
+            <ProtectedRoute>
+              <MeuEspacoSeguro />
+            </ProtectedRoute>
+          } />
           <Route path="/assistente" element={<AssistenteVirtual />} />
 
           {/* Público (Mural + Comentários) */}
@@ -54,7 +65,14 @@ function App() {
             }
           />
         </Routes>
-      </Router>
+    </Router>
+  );
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
     </AuthProvider>
   );
 }

@@ -1,22 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
+import { useAuth } from "../context/AuthContext";
 import Logo from "../assets/imagens/logo.png";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLogged, setIsLogged] = useState(false);
+  const { isAuthenticated, logout, user } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    setIsLogged(!!token);
-  }, []);
-
   function handleLogout() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    setIsLogged(false);
+    logout();
     navigate("/login");
   }
 
@@ -47,20 +41,27 @@ export default function Navbar() {
           <div className="flex items-center space-x-4">
 
             {/* 🔐 SE NÃO ESTIVER LOGADO */}
-            {!isLogged && (
+            {!isAuthenticated && (
               <Link to="/login" className="text-white hover:text-gray-200">
                 <FaUser size={24} />
               </Link>
             )}
 
             {/* ✅ SE ESTIVER LOGADO → botão roxo */}
-            {isLogged && (
-              <button
-                onClick={handleLogout}
-                className="bg-purple-600 px-4 py-2 rounded-lg hover:bg-purple-700 transition"
-              >
-                Sair
-              </button>
+            {isAuthenticated && (
+              <div className="flex items-center space-x-3">
+                {user?.name && (
+                  <span className="text-white text-sm hidden md:block">
+                    Olá, {user.name.split(' ')[0]}
+                  </span>
+                )}
+                <button
+                  onClick={handleLogout}
+                  className="bg-purple-600 px-4 py-2 rounded-lg hover:bg-purple-700 transition"
+                >
+                  Sair
+                </button>
+              </div>
             )}
 
             {/* Botão mobile */}
@@ -95,7 +96,7 @@ export default function Navbar() {
           <Link to="/sobre" className="block px-4 py-2 hover:bg-purple-800">Sobre</Link>
 
           {/* Logout mobile (roxo escuro também) */}
-          {isLogged && (
+          {isAuthenticated && (
             <button
               onClick={handleLogout}
               className="block w-full text-left px-4 py-2 bg-purple-600 hover:bg-purple-700 transition"
