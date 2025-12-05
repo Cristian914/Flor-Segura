@@ -258,7 +258,8 @@ export default function MapaDeApoio() {
       return;
     }
     
-    const url = `http://localhost:3001/api/locais-perigosos?latitude=${userLocation.lat}&longitude=${userLocation.lng}&raio=5`;
+    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+    const url = `${API_URL}/api/locais-perigosos?latitude=${userLocation.lat}&longitude=${userLocation.lng}&raio=5`;
     console.log('🌐 Carregando locais perigosos:', url);
     
     try {
@@ -338,7 +339,8 @@ export default function MapaDeApoio() {
     console.log('💾 Salvando local perigoso:', payload);
     
     try {
-      const response = await fetch('http://localhost:3001/api/locais-perigosos', {
+      const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+      const response = await fetch(`${API_URL}/api/locais-perigosos`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -393,7 +395,8 @@ export default function MapaDeApoio() {
   // 👍 Validar local perigoso
   const validarLocal = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3001/api/locais-perigosos/${id}/validar`, {
+      const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+      const response = await fetch(`${API_URL}/api/locais-perigosos/${id}/validar`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${getAuthToken()}`,
@@ -423,7 +426,8 @@ export default function MapaDeApoio() {
     }
     
     try {
-      const response = await fetch(`http://localhost:3001/api/locais-perigosos/${id}`, {
+      const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+      const response = await fetch(`${API_URL}/api/locais-perigosos/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${getAuthToken()}`,
