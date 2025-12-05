@@ -1,206 +1,289 @@
 import React from "react";
+import { motion } from "framer-motion";
+import { FaHeart, FaUsers, FaShieldAlt, FaHandsHelping, FaStar, FaAward } from "react-icons/fa";
+import { GiFlowerEmblem } from "react-icons/gi";
 import Navbar from "../components/navbar";
-import {
-  FaHandsHelping,
-  FaShieldAlt,
-  FaUsers,
-  FaHeart,
-  FaRobot,
-  FaMapMarkerAlt,
-  FaBolt,
-  FaBook,
-  FaCheckCircle,
-} from "react-icons/fa";
-import { GiLotusFlower } from "react-icons/gi";
 
-import MulherImg from "../assets/imagens/mulher.png";
+const SobrePage = () => {
+  const valores = [
+    {
+      icon: <FaHeart className="text-pink-500" />,
+      titulo: "Empatia",
+      descricao: "Compreendemos e acolhemos cada mulher com carinho e respeito."
+    },
+    {
+      icon: <FaShieldAlt className="text-purple-500" />,
+      titulo: "Segurança",
+      descricao: "Priorizamos a proteção e privacidade de todas as usuárias."
+    },
+    {
+      icon: <FaUsers className="text-blue-500" />,
+      titulo: "Comunidade",
+      descricao: "Fortalecemos a rede de apoio entre mulheres."
+    },
+    {
+      icon: <FaHandsHelping className="text-green-500" />,
+      titulo: "Apoio",
+      descricao: "Oferecemos suporte contínuo e recursos especializados."
+    }
+  ];
 
-export default function Sobre () {
+  const conquistas = [
+    { numero: "2.500+", texto: "Mulheres Atendidas" },
+    { numero: "50+", texto: "Locais Mapeados" },
+    { numero: "24/7", texto: "Suporte Disponível" },
+    { numero: "98%", texto: "Satisfação" }
+  ];
+
+  const equipe = [
+    {
+      nome: "Cristian",
+      cargo: "Fundador & Desenvolvedor",
+      descricao: "Apaixonado por tecnologia e impacto social",
+      avatar: "👨‍💻"
+    },
+    {
+      nome: "Equipe Técnica",
+      cargo: "Desenvolvimento & Suporte",
+      descricao: "Especialistas em segurança digital",
+      avatar: "👥"
+    },
+    {
+      nome: "Parceiros",
+      cargo: "Rede de Apoio",
+      descricao: "Delegacias, hospitais e ONGs",
+      avatar: "🤝"
+    }
+  ];
+
   return (
-    <div className="bg-gradient-to from-pink-100 to-pink-50 min-h-screen text-purple-900 font-sans">
+    <>
       <Navbar />
-
-      <main className="pt-28 px-6 md:px-20 text-center max-w-6xl mx-auto">
-
-        {/* Título */}
-        <h1 className="text-4xl md:text-5xl font-extrabold mb-6 flex items-center justify-center gap-3 text-purple-800">
-          Sobre o FlorSegura
-          <GiLotusFlower className="text-purple-500 text-5xl" />
-        </h1>
-
-        {/* Texto introdutório */}
-        <p className="text-lg md:text-xl text-purple-700 leading-relaxed max-w-4xl mx-auto mb-12 italic">
-          O FlorSegura é um espaço seguro, acolhedor e anônimo criado para apoiar
-          mulheres que enfrentam situações difíceis — com informação, tecnologia,
-          acolhimento e humanidade.
-        </p>
-
-        {/* Seção Quem Somos */}
-        <section className="flex flex-col md:flex-row items-center justify-center gap-10 mb-20">
-          <img
-            src={MulherImg}
-            alt="Ilustração de mulher"
-            className="w-64 md:w-80 rounded-3xl shadow-xl"
-          />
-
-          <div className="max-w-xl text-left text-purple-800">
-            <h2 className="text-3xl font-extrabold mb-4">Quem Somos</h2>
-
-            <p className="text-lg leading-relaxed">
-              Somos uma plataforma desenvolvida para oferecer apoio prático e
-              emocional, com ferramentas modernas e acessíveis. Nosso propósito é
-              garantir que nenhuma mulher se sinta sozinha ao enfrentar situações
-              de risco, medo ou dúvidas.
+      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-purple-100 pt-28 px-6">
+        <div className="max-w-7xl mx-auto">
+          {/* Hero Section */}
+          <motion.div
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <div className="flex justify-center mb-6">
+              <GiFlowerEmblem size={80} className="text-purple-600" />
+            </div>
+            <h1 className="text-5xl font-bold text-purple-800 mb-6">
+              Sobre a Flor Segura 🌸
+            </h1>
+            <p className="text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed">
+              Nascemos da necessidade de criar um espaço digital seguro onde mulheres possam 
+              encontrar apoio, informação e proteção. Nossa missão é transformar a tecnologia 
+              em uma ferramenta de empoderamento feminino.
             </p>
+          </motion.div>
 
-            <p className="text-lg leading-relaxed mt-4">
-              Combinamos tecnologia, empatia e informação para guiar mulheres em
-              busca de orientação, segurança e fortalecimento.
-            </p>
-          </div>
-        </section>
+          {/* Nossa História */}
+          <motion.section
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="mb-20"
+          >
+            <div className="bg-white/80 backdrop-blur-md rounded-3xl p-8 md:p-12 shadow-xl">
+              <h2 className="text-4xl font-bold text-purple-700 mb-8 text-center">
+                Nossa História
+              </h2>
+              <div className="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                  <p className="text-gray-700 text-lg leading-relaxed mb-6">
+                    A Flor Segura surgiu em 2024 com o objetivo de criar uma plataforma 
+                    colaborativa que pudesse mapear áreas de risco e conectar mulheres 
+                    a recursos de apoio em tempo real.
+                  </p>
+                  <p className="text-gray-700 text-lg leading-relaxed mb-6">
+                    Desenvolvida com tecnologia de ponta e foco na experiência do usuário, 
+                    nossa plataforma combina segurança digital, design intuitivo e 
+                    funcionalidades práticas para o dia a dia.
+                  </p>
+                  <p className="text-gray-700 text-lg leading-relaxed">
+                    Hoje, somos uma referência em tecnologia para segurança feminina, 
+                    conectando mulheres, autoridades e organizações de apoio em uma 
+                    rede colaborativa de proteção.
+                  </p>
+                </div>
+                <div className="text-center">
+                  <div className="bg-gradient-to-br from-purple-500 to-pink-500 rounded-full w-64 h-64 mx-auto flex items-center justify-center text-white text-6xl shadow-2xl">
+                    💜
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.section>
 
-        {/* Assistente IA */}
-        <section className="bg-purple-100 border border-purple-200 rounded-3xl p-10 shadow-lg max-w-5xl mx-auto mb-20">
-          <h2 className="text-3xl font-extrabold text-purple-800 mb-6 flex items-center justify-center gap-3">
-            <FaRobot className="text-purple-600 text-4xl" />
-            Flor — Assistente Inteligente de Acolhimento
-          </h2>
+          {/* Nossos Valores */}
+          <motion.section
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="mb-20"
+          >
+            <h2 className="text-4xl font-bold text-purple-700 mb-12 text-center">
+              Nossos Valores
+            </h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {valores.map((valor, index) => (
+                <motion.div
+                  key={index}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="bg-white/80 backdrop-blur-md rounded-2xl p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300"
+                >
+                  <div className="text-4xl mb-4 flex justify-center">
+                    {valor.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-purple-700 mb-3">
+                    {valor.titulo}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    {valor.descricao}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.section>
 
-          <p className="text-lg leading-relaxed text-purple-700 max-w-3xl mx-auto">
-            A Flor é uma assistente baseada em IA criada especialmente para oferecer
-            acolhimento, orientação e respostas acessíveis — sempre de forma
-            anônima, segura e respeitosa. Ela foi desenvolvida para ser a primeira
-            escuta de mulheres que precisam conversar ou pedir ajuda.
-          </p>
+          {/* Conquistas */}
+          <motion.section
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="mb-20"
+          >
+            <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl p-8 md:p-12 text-white shadow-2xl">
+              <h2 className="text-4xl font-bold mb-12 text-center">
+                Nosso Impacto
+              </h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                {conquistas.map((conquista, index) => (
+                  <motion.div
+                    key={index}
+                    whileHover={{ scale: 1.05 }}
+                    className="text-center"
+                  >
+                    <div className="text-4xl md:text-5xl font-bold mb-2">
+                      {conquista.numero}
+                    </div>
+                    <div className="text-lg opacity-90">
+                      {conquista.texto}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </motion.section>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
-            <div className="flex flex-col items-center p-6 bg-white rounded-3xl shadow-md">
-              <FaHeart className="text-4xl text-purple-500 mb-3" />
-              <h4 className="text-xl font-bold mb-2">Escuta acolhedora</h4>
-              <p className="text-center text-purple-700">
-                A linguagem é simples, empática e pensada para reduzir ansiedade.
+          {/* Nossa Equipe */}
+          <motion.section
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="mb-20"
+          >
+            <h2 className="text-4xl font-bold text-purple-700 mb-12 text-center">
+              Quem Somos
+            </h2>
+            <div className="grid md:grid-cols-3 gap-8">
+              {equipe.map((membro, index) => (
+                <motion.div
+                  key={index}
+                  whileHover={{ scale: 1.02, y: -5 }}
+                  className="bg-white/80 backdrop-blur-md rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-all duration-300"
+                >
+                  <div className="text-6xl mb-4">
+                    {membro.avatar}
+                  </div>
+                  <h3 className="text-2xl font-bold text-purple-700 mb-2">
+                    {membro.nome}
+                  </h3>
+                  <p className="text-purple-500 font-semibold mb-3">
+                    {membro.cargo}
+                  </p>
+                  <p className="text-gray-600">
+                    {membro.descricao}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.section>
+
+          {/* Missão, Visão e Valores */}
+          <motion.section
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="mb-20"
+          >
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="bg-white/80 backdrop-blur-md rounded-2xl p-8 shadow-lg text-center">
+                <div className="text-4xl mb-4">🎯</div>
+                <h3 className="text-2xl font-bold text-purple-700 mb-4">Missão</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Empoderar mulheres através da tecnologia, criando uma rede colaborativa 
+                  de segurança e apoio que salva vidas e transforma comunidades.
+                </p>
+              </div>
+              
+              <div className="bg-white/80 backdrop-blur-md rounded-2xl p-8 shadow-lg text-center">
+                <div className="text-4xl mb-4">🔮</div>
+                <h3 className="text-2xl font-bold text-purple-700 mb-4">Visão</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Ser a principal plataforma de segurança feminina no Brasil, 
+                  reconhecida pela inovação, impacto social e transformação de vidas.
+                </p>
+              </div>
+              
+              <div className="bg-white/80 backdrop-blur-md rounded-2xl p-8 shadow-lg text-center">
+                <div className="text-4xl mb-4">💎</div>
+                <h3 className="text-2xl font-bold text-purple-700 mb-4">Compromisso</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Manter sempre a privacidade, segurança e bem-estar das usuárias 
+                  como nossa prioridade número um em todas as decisões.
+                </p>
+              </div>
+            </div>
+          </motion.section>
+
+          {/* Call to Action */}
+          <motion.section
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center"
+          >
+            <div className="bg-white/80 backdrop-blur-md rounded-3xl p-8 md:p-12 shadow-xl">
+              <h2 className="text-3xl font-bold text-purple-700 mb-6">
+                Faça Parte da Nossa História
+              </h2>
+              <p className="text-xl text-gray-700 mb-8 max-w-3xl mx-auto">
+                Junte-se a milhares de mulheres que já encontraram segurança, 
+                apoio e empoderamento através da Flor Segura.
               </p>
+              <button 
+                onClick={() => window.location.href = '/register'}
+                className="bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-4 px-8 rounded-xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+              >
+                Cadastre-se Gratuitamente 💜
+              </button>
             </div>
-
-            <div className="flex flex-col items-center p-6 bg-white rounded-3xl shadow-md">
-              <FaShieldAlt className="text-4xl text-purple-500 mb-3" />
-              <h4 className="text-xl font-bold mb-2">Anonimato total</h4>
-              <p className="text-center text-purple-700">
-                Não pedimos nome, endereço ou qualquer dado sensível.
-              </p>
-            </div>
-
-            <div className="flex flex-col items-center p-6 bg-white rounded-3xl shadow-md">
-              <FaBolt className="text-4xl text-purple-500 mb-3" />
-              <h4 className="text-xl font-bold mb-2">Apoio imediato</h4>
-              <p className="text-center text-purple-700">
-                Orientações rápidas, claras e adaptadas ao que a mulher precisa.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Cards principais */}
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-20">
-          <div className="bg-purple-500 text-white rounded-3xl p-8 shadow-lg hover:scale-105 transition-transform duration-300 flex flex-col items-center text-center">
-            <FaHandsHelping className="text-5xl mb-4" />
-            <h2 className="text-2xl font-bold mb-4">Nossa Missão</h2>
-            <p className="text-base leading-relaxed">
-              Acolher, orientar e fortalecer mulheres por meio de apoio seguro e
-              ferramentas efetivas.
-            </p>
-          </div>
-
-          <div className="bg-purple-500 text-white rounded-3xl p-8 shadow-lg hover:scale-105 transition-transform duration-300 flex flex-col items-center text-center">
-            <FaShieldAlt className="text-5xl mb-4" />
-            <h2 className="text-2xl font-bold mb-4">Nosso Compromisso</h2>
-            <ul className="list-disc list-inside space-y-2 text-left text-sm md:text-base">
-              <li>Garantir segurança e anonimato</li>
-              <li>Oferecer acolhimento e empatia real</li>
-              <li>Promover autonomia e informação</li>
-              <li>Facilitar o acesso a ajuda imediata</li>
-            </ul>
-          </div>
-
-          <div className="bg-purple-500 text-white rounded-3xl p-8 shadow-lg hover:scale-105 transition-transform duration-300 flex flex-col items-center text-center">
-            <FaUsers className="text-5xl mb-4" />
-            <h2 className="text-2xl font-bold mb-4">Parcerias que fortalecem</h2>
-            <p className="text-base leading-relaxed">
-              Trabalhamos com ONGs, defensorias, psicólogas, universidades e
-              redes de proteção para expandir nosso impacto.
-            </p>
-          </div>
-        </section>
-
-        {/* Funcionalidades principais — corrigido */}
-        <section className="bg-pink-100 rounded-3xl p-10 shadow-lg max-w-5xl mx-auto mb-20">
-          <h3 className="text-3xl font-extrabold text-purple-800 mb-10">
-            Funcionalidades Principais
-          </h3>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-purple-800">
-            <div className="flex items-start gap-4">
-              <FaMapMarkerAlt className="text-4xl text-purple-500" />
-              <p className="text-lg"><strong>Mapa de Apoio</strong>: encontre serviços próximos.</p>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <FaRobot className="text-4xl text-purple-500" />
-              <p className="text-lg"><strong>Assistente via IA</strong>: apoio imediato e anônimo.</p>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <FaBook className="text-4xl text-purple-500" />
-              <p className="text-lg"><strong>Informações sobre violência</strong> explicadas de forma clara.</p>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <FaBolt className="text-4xl text-purple-500" />
-              <p className="text-lg"><strong>Acesso rápido a emergência</strong> e orientação segura.</p>
-            </div>
-          </div>
-        </section>
-
-        {/* Quem se beneficia — corrigido */}
-        <section className="bg-pink-100 rounded-3xl p-10 shadow-lg max-w-5xl mx-auto mb-20">
-          <h3 className="text-3xl font-extrabold text-purple-700 mb-6">
-            Quem se beneficia?
-          </h3>
-
-          <ul className="space-y-4 text-left text-lg text-purple-800 max-w-3xl mx-auto">
-            <li className="flex gap-3 items-start">
-              <FaCheckCircle className="text-purple-500 mt-1" />
-              Mulheres vivendo violência.
-            </li>
-
-            <li className="flex gap-3 items-start">
-              <FaCheckCircle className="text-purple-500 mt-1" />
-              Mulheres que suspeitam estar em um relacionamento abusivo.
-            </li>
-
-            <li className="flex gap-3 items-start">
-              <FaCheckCircle className="text-purple-500 mt-1" />
-              Pessoas que desejam ajudar amigas ou familiares.
-            </li>
-
-            <li className="flex gap-3 items-start">
-              <FaCheckCircle className="text-purple-500 mt-1" />
-              Profissionais que buscam materiais simples e confiáveis.
-            </li>
-          </ul>
-        </section>
-
-        {/* Conclusão */}
-        <section className="text-center max-w-4xl mx-auto mt-10 mb-20">
-          <p className="text-xl text-purple-800 font-semibold leading-relaxed">
-            A FlorSegura foi criada para proteger, orientar e acolher —  
-            com tecnologia, humanidade e segurança.  
-            Nenhuma mulher deve enfrentar o medo sozinha.
-          </p>
-        </section>
-
-      </main>
-    </div>
+          </motion.section>
+        </div>
+      </div>
+    </>
   );
-}
+};
+
+export default SobrePage;
