@@ -258,7 +258,7 @@ export default function MapaDeApoio() {
       return;
     }
     
-    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
     const url = `${API_URL}/api/locais-perigosos?latitude=${userLocation.lat}&longitude=${userLocation.lng}&raio=5`;
     console.log('🌐 Carregando locais perigosos:', url);
     

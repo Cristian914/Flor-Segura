@@ -1,5 +1,7 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
-const API_URL = `${API_BASE_URL}/auth`;
+import { API_CONFIG, buildApiUrl } from '../config/api.js';
+
+const API_BASE_URL = API_CONFIG.BASE_URL;
+const API_URL = buildApiUrl(API_CONFIG.ENDPOINTS.AUTH);
 
 // Configuração padrão para requests
 const defaultHeaders = {

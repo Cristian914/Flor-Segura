@@ -1,11 +1,12 @@
 // LoginPage.jsx
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaUser, FaLock } from "react-icons/fa";
 import LogoHome from "../assets/imagens/logohome.png";
 import { useNavigate } from "react-router-dom";
 import { loginRequest } from "../services/api";
 import { AuthContext } from "../context/AuthContext";
+import { logApiTest } from "../utils/apiTest";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -17,6 +18,21 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [apiStatus, setApiStatus] = useState(null);
+
+  // Testar conectividade com a API ao carregar o componente
+  useEffect(() => {
+    const testApi = async () => {
+      try {
+        const results = await logApiTest();
+        setApiStatus(results.isReachable ? 'online' : 'offline');
+      } catch (err) {
+        setApiStatus('offline');
+        console.error('Erro ao testar API:', err);
+      }
+    };
+    testApi();
+  }, []);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -24,6 +40,11 @@ const LoginPage = () => {
     setLoading(true);
 
     try {
+      // Verificar se a API está online antes de tentar login
+      if (apiStatus === 'offline') {
+        throw new Error('Servidor indisponível. Tente novamente em alguns minutos.');
+      }
+
       const data = await loginRequest(email, password);
 
       // Salva usuário no AuthContext
@@ -31,7 +52,18 @@ const LoginPage = () => {
 
       navigate("/");
     } catch (err) {
-      setError(err.message || "Erro ao fazer login.");
+      console.error('Erro no login:', err);
+      
+      // Mensagens de erro mais específicas
+      if (err.message.includes('fetch')) {
+        setError('Erro de conexão. Verifique sua internet e tente novamente.');
+      } else if (err.message.includes('401') || err.message.includes('Unauthorized')) {
+        setError('Email ou senha incorretos.');
+      } else if (err.message.includes('500')) {
+        setError('Erro no servidor. Tente novamente em alguns minutos.');
+      } else {
+        setError(err.message || "Erro ao fazer login. Tente novamente.");
+      }
     }
 
     setLoading(false);
@@ -109,6 +141,18 @@ const LoginPage = () => {
             </div>
 
             {error && <p className="text-red-500 text-center">{error}</p>}
+            
+            {apiStatus === 'offline' && (
+              <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded text-center text-sm">
+                ⚠️ API offline. Verifique sua conexão ou tente novamente.
+              </div>
+            )}
+            
+            {apiStatus === 'online' && (
+              <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded text-center text-sm">
+                ✅ Conectado com o servidor
+              </div>
+            )}
 
             <button
               type="submit"

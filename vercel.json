@@ -1,8 +1,16 @@
 {
-    "rewrites": [
-        {
-            "source": "/(.*)",
-            "destination": "/index.html"
-        }
-    ]
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "env": {
+    "VITE_API_URL": "https://florsegura-backe.onrender.com"
+  },
+  "build": {
+    "env": {
+      "VITE_API_URL": "https://florsegura-backe.onrender.com"
+    }
+  }
 }
