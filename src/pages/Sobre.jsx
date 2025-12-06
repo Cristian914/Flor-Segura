@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { FaHeart, FaUsers, FaShieldAlt, FaHandsHelping, FaStar, FaAward } from "react-icons/fa";
 import { GiFlowerEmblem } from "react-icons/gi";
 import Navbar from "../components/navbar";
+import MulherImg from "../assets/imagens/mulher.png";
 
 const SobrePage = () => {
   const valores = [
@@ -66,19 +67,36 @@ const SobrePage = () => {
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="flex flex-col lg:flex-row items-center gap-12 mb-20"
           >
-            <div className="flex justify-center mb-6">
-              <GiFlowerEmblem size={80} className="text-purple-600" />
+            <div className="flex-1 text-center lg:text-left">
+              <div className="flex justify-center lg:justify-start mb-6">
+                <GiFlowerEmblem size={80} className="text-purple-600" />
+              </div>
+              <h1 className="text-5xl font-bold text-purple-800 mb-6">
+                Sobre a Flor Segura 🌸
+              </h1>
+              <p className="text-xl text-gray-700 leading-relaxed mb-6">
+                Nascemos da necessidade de criar um espaço digital seguro onde mulheres possam 
+                encontrar apoio, informação e proteção.
+              </p>
+              <p className="text-lg text-gray-600 leading-relaxed">
+                Nossa missão é transformar a tecnologia em uma ferramenta de empoderamento feminino,
+                conectando mulheres a recursos de segurança e apoio em tempo real.
+              </p>
             </div>
-            <h1 className="text-5xl font-bold text-purple-800 mb-6">
-              Sobre a Flor Segura 🌸
-            </h1>
-            <p className="text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed">
-              Nascemos da necessidade de criar um espaço digital seguro onde mulheres possam 
-              encontrar apoio, informação e proteção. Nossa missão é transformar a tecnologia 
-              em uma ferramenta de empoderamento feminino.
-            </p>
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="flex-1 flex justify-center"
+            >
+              <img
+                src={MulherImg}
+                alt="Mulher empoderada"
+                className="w-80 md:w-96 rounded-3xl shadow-2xl"
+              />
+            </motion.div>
           </motion.div>
 
           {/* Nossa História */}
@@ -93,29 +111,22 @@ const SobrePage = () => {
               <h2 className="text-4xl font-bold text-purple-700 mb-8 text-center">
                 Nossa História
               </h2>
-              <div className="grid md:grid-cols-2 gap-8 items-center">
-                <div>
-                  <p className="text-gray-700 text-lg leading-relaxed mb-6">
-                    A Flor Segura surgiu em 2024 com o objetivo de criar uma plataforma 
-                    colaborativa que pudesse mapear áreas de risco e conectar mulheres 
-                    a recursos de apoio em tempo real.
-                  </p>
-                  <p className="text-gray-700 text-lg leading-relaxed mb-6">
-                    Desenvolvida com tecnologia de ponta e foco na experiência do usuário, 
-                    nossa plataforma combina segurança digital, design intuitivo e 
-                    funcionalidades práticas para o dia a dia.
-                  </p>
-                  <p className="text-gray-700 text-lg leading-relaxed">
-                    Hoje, somos uma referência em tecnologia para segurança feminina, 
-                    conectando mulheres, autoridades e organizações de apoio em uma 
-                    rede colaborativa de proteção.
-                  </p>
-                </div>
-                <div className="text-center">
-                  <div className="bg-gradient-to-br from-purple-500 to-pink-500 rounded-full w-64 h-64 mx-auto flex items-center justify-center text-white text-6xl shadow-2xl">
-                    💜
-                  </div>
-                </div>
+              <div className="text-center max-w-4xl mx-auto">
+                <p className="text-gray-700 text-lg leading-relaxed mb-6">
+                  A Flor Segura surgiu em 2024 com o objetivo de criar uma plataforma 
+                  colaborativa que pudesse mapear áreas de risco e conectar mulheres 
+                  a recursos de apoio em tempo real.
+                </p>
+                <p className="text-gray-700 text-lg leading-relaxed mb-6">
+                  Desenvolvida com tecnologia de ponta e foco na experiência do usuário, 
+                  nossa plataforma combina segurança digital, design intuitivo e 
+                  funcionalidades práticas para o dia a dia.
+                </p>
+                <p className="text-gray-700 text-lg leading-relaxed">
+                  Hoje, somos uma referência em tecnologia para segurança feminina, 
+                  conectando mulheres, autoridades e organizações de apoio em uma 
+                  rede colaborativa de proteção.
+                </p>
               </div>
             </div>
           </motion.section>

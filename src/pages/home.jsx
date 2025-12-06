@@ -1,9 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { FaPhoneAlt, FaShieldAlt, FaUsers, FaClock, FaStar } from "react-icons/fa";
+import { FaPhoneAlt, FaShieldAlt, FaUsers, FaClock, FaStar, FaMapMarkerAlt } from "react-icons/fa";
 import { GiFlowerEmblem } from "react-icons/gi";
-import { MdEmergency, MdAutoStories } from "react-icons/md";
 import { BiSupport } from "react-icons/bi";
 import LogoHome from "../assets/imagens/logohome.png"; 
 import CardHome from "../assets/imagens/cardhome.png"; 
@@ -14,46 +13,31 @@ const HomePage = () => {
 
   const cards = [
     {
-      title: "Entre em contato com alguém",
+      title: "Mapa de Apoio",
       description:
-        "Precisa conversar? Encontre apoio, ajuda e orientação de forma rápida e segura.",
-      icon: <FaPhoneAlt size={40} className="text-purple-600 mb-4" />,
-      action: () => navigate("/contato"),
-      gradient: "from-purple-500/10 to-purple-600/10"
+        "Encontre delegacias, hospitais e centros de apoio próximos a você com rotas em tempo real.",
+      icon: <FaShieldAlt size={40} className="text-purple-600 mb-4" />,
+      action: () => navigate("/mapa"),
+      gradient: "from-purple-500/10 to-purple-600/10",
+      priority: true
     },
     {
-      title: "Descubra mais sobre a Flor Segura",
+      title: "Sobre a Flor Segura",
       description:
-        "Conheça nossa missão, nossos valores e como ajudamos mulheres todos os dias.",
+        "Conheça nossa missão, valores e como ajudamos mulheres todos os dias.",
       icon: <GiFlowerEmblem size={40} className="text-pink-500 mb-4" />,
       action: () => navigate("/sobre"),
       gradient: "from-pink-500/10 to-pink-600/10"
     },
     {
-      title: "Recursos de Emergência",
+      title: "Emergência 190",
       description:
-        "Acesso rápido a números de emergência e recursos de segurança imediatos.",
-      icon: <MdEmergency size={40} className="text-red-500 mb-4" />,
-      action: () => navigate("/emergencia"),
+        "Acesso rápido aos números de emergência. Em caso de perigo, ligue 190 imediatamente.",
+      icon: <FaPhoneAlt size={40} className="text-red-500 mb-4" />,
+      action: () => window.open('tel:190'),
       gradient: "from-red-500/10 to-red-600/10",
       priority: true
-    },
-    {
-      title: "Histórias Inspiradoras",
-      description:
-        "Leia histórias reais de superação e encontre força em experiências compartilhadas.",
-      icon: <MdAutoStories size={40} className="text-green-500 mb-4" />,
-      action: () => navigate("/historias"),
-      gradient: "from-green-500/10 to-green-600/10"
-    },
-    {
-      title: "Dicas de Segurança",
-      description:
-        "Aprenda estratégias e dicas práticas para sua proteção e bem-estar.",
-      icon: <FaShieldAlt size={40} className="text-blue-500 mb-4" />,
-      action: () => navigate("/seguranca"),
-      gradient: "from-blue-500/10 to-blue-600/10"
-    },
+    }
   ];
 
   const stats = [
@@ -99,8 +83,8 @@ const HomePage = () => {
             Bem-vinda à Flor Segura 💜
           </h1>
           <p className="text-gray-700 mt-2 max-w-2xl leading-relaxed text-lg">
-            Um espaço seguro e acolhedor para mulheres. Aqui, você encontra apoio,
-            informações e força para recomeçar.
+            Sua segurança é nossa prioridade. Encontre locais de apoio, acesse números de emergência
+            e navegue com confiança pela sua cidade.
           </p>
         </motion.div>
 
@@ -131,7 +115,7 @@ const HomePage = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl w-full mb-16"
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl w-full mb-16"
         >
           {cards.map((card, index) => (
             <motion.div
@@ -162,6 +146,118 @@ const HomePage = () => {
               </p>
             </motion.div>
           ))}
+        </motion.div>
+
+        {/* Seção de Números de Emergência */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="bg-red-50 border-2 border-red-200 rounded-3xl p-8 max-w-5xl w-full mb-16"
+        >
+          <h3 className="text-2xl font-bold text-red-700 mb-6 text-center flex items-center justify-center gap-3">
+            <FaPhoneAlt className="text-red-600" />
+            Números de Emergência
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <motion.a
+              href="tel:190"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-white rounded-xl p-6 text-center shadow-md hover:shadow-lg transition-all duration-300 border-2 border-red-200 hover:border-red-400"
+            >
+              <div className="text-3xl font-bold text-red-600 mb-2">190</div>
+              <div className="text-gray-700 font-semibold">Polícia Militar</div>
+              <div className="text-sm text-gray-500 mt-1">Emergências gerais</div>
+            </motion.a>
+            
+            <motion.a
+              href="tel:180"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-white rounded-xl p-6 text-center shadow-md hover:shadow-lg transition-all duration-300 border-2 border-purple-200 hover:border-purple-400"
+            >
+              <div className="text-3xl font-bold text-purple-600 mb-2">180</div>
+              <div className="text-gray-700 font-semibold">Disque Denúncia</div>
+              <div className="text-sm text-gray-500 mt-1">Violência contra mulher</div>
+            </motion.a>
+            
+            <motion.a
+              href="tel:192"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-white rounded-xl p-6 text-center shadow-md hover:shadow-lg transition-all duration-300 border-2 border-blue-200 hover:border-blue-400"
+            >
+              <div className="text-3xl font-bold text-blue-600 mb-2">192</div>
+              <div className="text-gray-700 font-semibold">SAMU</div>
+              <div className="text-sm text-gray-500 mt-1">Emergências médicas</div>
+            </motion.a>
+          </div>
+        </motion.div>
+
+        {/* Funcionalidades do App */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="max-w-5xl w-full mb-16"
+        >
+          <h2 className="text-3xl font-bold text-purple-800 text-center mb-12">
+            O que oferecemos para você
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              className="bg-white/80 backdrop-blur-md rounded-2xl p-6 shadow-lg"
+            >
+              <div className="flex items-center mb-4">
+                <FaMapMarkerAlt className="text-purple-600 text-2xl mr-3" />
+                <h3 className="text-xl font-bold text-purple-700">Mapa Interativo</h3>
+              </div>
+              <p className="text-gray-600 leading-relaxed">
+                Localize delegacias, hospitais e centros de apoio próximos com rotas otimizadas e informações atualizadas.
+              </p>
+            </motion.div>
+            
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              className="bg-white/80 backdrop-blur-md rounded-2xl p-6 shadow-lg"
+            >
+              <div className="flex items-center mb-4">
+                <FaShieldAlt className="text-red-600 text-2xl mr-3" />
+                <h3 className="text-xl font-bold text-purple-700">Locais Perigosos</h3>
+              </div>
+              <p className="text-gray-600 leading-relaxed">
+                Visualize e reporte áreas de risco na sua região, ajudando outras mulheres a se manterem seguras.
+              </p>
+            </motion.div>
+            
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              className="bg-white/80 backdrop-blur-md rounded-2xl p-6 shadow-lg"
+            >
+              <div className="flex items-center mb-4">
+                <FaPhoneAlt className="text-green-600 text-2xl mr-3" />
+                <h3 className="text-xl font-bold text-purple-700">Emergência Rápida</h3>
+              </div>
+              <p className="text-gray-600 leading-relaxed">
+                Acesso instantâneo aos principais números de emergência com apenas um toque.
+              </p>
+            </motion.div>
+            
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              className="bg-white/80 backdrop-blur-md rounded-2xl p-6 shadow-lg"
+            >
+              <div className="flex items-center mb-4">
+                <FaUsers className="text-blue-600 text-2xl mr-3" />
+                <h3 className="text-xl font-bold text-purple-700">Comunidade Segura</h3>
+              </div>
+              <p className="text-gray-600 leading-relaxed">
+                Faça parte de uma rede colaborativa de mulheres que se ajudam mutuamente.
+              </p>
+            </motion.div>
+          </div>
         </motion.div>
 
         {/* Card de cadastro melhorado */}
