@@ -25,8 +25,8 @@ export const testApiConnection = async () => {
     results.responseTime = Date.now() - startTime;
     results.isReachable = true;
     
-    // Teste de endpoints específicos
-    const endpoints = ['/auth/health', '/api/health', '/health'];
+    // Teste apenas do endpoint que existe
+    const endpoints = ['/health'];
     
     for (const endpoint of endpoints) {
       try {

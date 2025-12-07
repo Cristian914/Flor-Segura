@@ -8,13 +8,11 @@ import Loading from "./components/Loading";
 import Home from "./pages/home";
 import PrecisoDeAjuda from "./pages/PrecisoDeAjuda.jsx";
 import MapaDeApoio from "./pages/MapaDeApoio";
-import EntendaAViolencia from "./pages/EntendaAViolencia";
-import RedeDeApoio from "./pages/RedeDeApoio";
+import EntendaViolencia from "./pages/EntendaViolencia";
 import Sobre from "./pages/Sobre";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import MeuEspacoSeguro from "./pages/MeuEspacoSeguro";
-import AssistenteVirtual from "./pages/AssistenteVirtual";
 
 // 🟣 Páginas públicas novas
 import Publico from "./pages/Publico";
@@ -34,14 +32,12 @@ function AppContent() {
           <Route path="/" element={<Home />} />
           <Route path="/preciso-de-ajuda" element={<PrecisoDeAjuda />} />
           <Route path="/mapa-de-apoio" element={<MapaDeApoio />} />
-          <Route path="/entenda-a-violencia" element={<EntendaAViolencia />} />
-          <Route path="/rede-de-apoio" element={<RedeDeApoio />} />
+          <Route path="/entenda-violencia" element={<EntendaViolencia />} />
           <Route path="/meu-espaco-seguro" element={
             <ProtectedRoute>
               <MeuEspacoSeguro />
             </ProtectedRoute>
           } />
-          <Route path="/assistente" element={<AssistenteVirtual />} />
 
           {/* Público (Mural + Comentários) */}
           <Route path="/publico" element={<Publico />} />

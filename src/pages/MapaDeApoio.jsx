@@ -339,7 +339,7 @@ export default function MapaDeApoio() {
     console.log('💾 Salvando local perigoso:', payload);
     
     try {
-      const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
       const response = await fetch(`${API_URL}/api/locais-perigosos`, {
         method: 'POST',
         headers: {
@@ -395,7 +395,7 @@ export default function MapaDeApoio() {
   // 👍 Validar local perigoso
   const validarLocal = async (id) => {
     try {
-      const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
       const response = await fetch(`${API_URL}/api/locais-perigosos/${id}/validar`, {
         method: 'PUT',
         headers: {
@@ -426,7 +426,7 @@ export default function MapaDeApoio() {
     }
     
     try {
-      const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
       const response = await fetch(`${API_URL}/api/locais-perigosos/${id}`, {
         method: 'DELETE',
         headers: {
@@ -460,166 +460,246 @@ export default function MapaDeApoio() {
     <>
       <Navbar />
       <div
-        className={`min-h-screen bg-gradient-to-b from-purple-50 via-purple-100 to-white pt-28 px-6 lg:px-24 transition-all ${
+        className={`min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-purple-100 pt-20 px-4 transition-all ${
           telaCheia ? "fixed inset-0 z-50 bg-white pt-4 px-4" : ""
         }`}
       >
-        {/* Cabeçalho */}
+        {/* Header */}
         {!telaCheia && (
           <>
-            <motion.h1
-              initial={{ opacity: 0, y: -30 }}
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-5xl font-extrabold text-center text-purple-900 mb-4"
+              className="text-center mb-8"
             >
-              Mapa de Apoio
-            </motion.h1>
-            <p className="text-center text-purple-700 mb-10 text-lg font-medium">
-              Você não está sozinha. Encontre ajuda e acolhimento próximos de você 💜
-            </p>
-
-            {/* Status de Autenticação */}
-            <div className="text-center mb-4 p-3 bg-blue-50 border border-blue-200 rounded-xl">
-              <p className="text-blue-700 text-sm">
-                🔑 Token ativo | 📍 Localização: {userLocation ? `${userLocation.lat.toFixed(4)}, ${userLocation.lng.toFixed(4)}` : 'Carregando...'} | 🚨 Perigos: {locaisPerigosos.length}
-              </p>
-            </div>
-
-            {/* Controles de Segurança */}
-            <div className="flex flex-wrap justify-center gap-3 mb-6">
-              <button
-                onClick={() => setModoMarcacao(!modoMarcacao)}
-                className={`flex items-center gap-2 px-5 py-3 rounded-full font-semibold border-2 transition-all ${
-                  modoMarcacao
-                    ? "bg-red-500 text-white border-red-600 shadow-lg"
-                    : "bg-white text-red-600 border-red-300 hover:bg-red-50"
-                }`}
-              >
-                <FaPlus /> {modoMarcacao ? "Cancelar Marcação" : "Marcar Local Perigoso"}
-              </button>
-              
-              <button
-                onClick={() => setMostrarPerigos(!mostrarPerigos)}
-                className={`flex items-center gap-2 px-5 py-3 rounded-full font-semibold border-2 transition-all ${
-                  mostrarPerigos
-                    ? "bg-orange-500 text-white border-orange-600"
-                    : "bg-white text-orange-600 border-orange-300 hover:bg-orange-50"
-                }`}
-              >
-                {mostrarPerigos ? <FaEye /> : <FaEyeSlash />}
-                {mostrarPerigos ? "Ocultar Perigos" : "Mostrar Perigos"}
-              </button>
-              
-              <button
-                onClick={carregarLocaisPerigosos}
-                className="flex items-center gap-2 px-5 py-3 rounded-full font-semibold border-2 bg-white text-blue-600 border-blue-300 hover:bg-blue-50 transition-all"
-              >
-                <FaMap /> Atualizar Mapa
-              </button>
-            </div>
-
-            {modoMarcacao && (
-              <div className="text-center mb-6 p-4 bg-red-50 border border-red-200 rounded-xl">
-                <p className="text-red-700 font-medium">
-                  🎯 Clique no mapa para marcar um local perigoso
+              <div className="bg-white/80 backdrop-blur-md rounded-3xl p-8 shadow-xl border border-purple-200 max-w-4xl mx-auto">
+                <div className="flex items-center justify-center gap-3 mb-4">
+                  <FaShieldAlt className="text-purple-500 text-3xl" />
+                  <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                    Mapa de Apoio
+                  </h1>
+                </div>
+                <p className="text-purple-700 text-lg max-w-2xl mx-auto mb-6">
+                  Encontre locais seguros, delegacias especializadas e centros de apoio próximos a você. Sua segurança é nossa prioridade.
                 </p>
+                
+                <div className="flex flex-wrap justify-center gap-4">
+                  <div className="bg-purple-100 px-4 py-2 rounded-full flex items-center gap-2">
+                    <FaMapMarkerAlt className="text-purple-600" />
+                    <span className="text-purple-700 font-semibold">{locaisFiltrados.length} locais de apoio</span>
+                  </div>
+                  <div className="bg-red-100 px-4 py-2 rounded-full flex items-center gap-2">
+                    <FaExclamationTriangle className="text-red-600" />
+                    <span className="text-red-700 font-semibold">{locaisPerigosos.length} alertas ativos</span>
+                  </div>
+                  <div className="bg-green-100 px-4 py-2 rounded-full flex items-center gap-2">
+                    <span className="text-green-600">📍</span>
+                    <span className="text-green-700 font-semibold">
+                      {userLocation ? 'Localização ativa' : 'Obtendo localização...'}
+                    </span>
+                  </div>
+                </div>
               </div>
-            )}
+            </motion.div>
 
-            {/* Filtros */}
-            <div className="flex flex-wrap justify-center gap-3 mb-10">
-              {["Todos", "Delegacia", "Hospital", "Centro de Apoio"].map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setFiltro(cat)}
-                  className={`flex items-center gap-2 px-5 py-2 rounded-full font-semibold border transition-all ${
-                    filtro === cat
-                      ? "bg-purple-600 text-white border-purple-700"
-                      : "bg-white text-purple-700 border-purple-300 hover:bg-purple-100"
+            {/* Controles Principais */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="bg-white/90 backdrop-blur-md rounded-2xl p-6 shadow-lg border border-purple-200 mb-6 max-w-4xl mx-auto"
+            >
+              <div className="flex flex-wrap justify-center gap-3">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setModoMarcacao(!modoMarcacao)}
+                  className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all shadow-lg ${
+                    modoMarcacao
+                      ? "bg-gradient-to-r from-red-500 to-red-600 text-white"
+                      : "bg-white text-red-600 border-2 border-red-300 hover:bg-red-50"
                   }`}
                 >
-                  <FaFilter /> {cat}
-                </button>
-              ))}
-            </div>
+                  <FaPlus /> {modoMarcacao ? "Cancelar Marcação" : "Reportar Perigo"}
+                </motion.button>
+                
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setMostrarPerigos(!mostrarPerigos)}
+                  className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all shadow-lg ${
+                    mostrarPerigos
+                      ? "bg-gradient-to-r from-orange-500 to-orange-600 text-white"
+                      : "bg-white text-orange-600 border-2 border-orange-300 hover:bg-orange-50"
+                  }`}
+                >
+                  {mostrarPerigos ? <FaEye /> : <FaEyeSlash />}
+                  {mostrarPerigos ? "Ocultar Alertas" : "Mostrar Alertas"}
+                </motion.button>
+                
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={carregarLocaisPerigosos}
+                  className="flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all shadow-lg bg-white text-blue-600 border-2 border-blue-300 hover:bg-blue-50"
+                >
+                  <FaMap /> Atualizar
+                </motion.button>
+              </div>
+
+              {modoMarcacao && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  className="mt-4 p-4 bg-red-50 border border-red-200 rounded-xl text-center"
+                >
+                  <p className="text-red-700 font-medium flex items-center justify-center gap-2">
+                    <span className="text-xl">🎯</span>
+                    Clique no mapa para reportar um local perigoso
+                  </p>
+                </motion.div>
+              )}
+            </motion.div>
+
+            {/* Filtros */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="bg-white/90 backdrop-blur-md rounded-2xl p-6 shadow-lg border border-purple-200 mb-8 max-w-4xl mx-auto"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <FaFilter className="text-purple-500" />
+                <h3 className="text-lg font-bold text-purple-900">Filtrar Locais de Apoio</h3>
+              </div>
+              <div className="flex flex-wrap justify-center gap-3">
+                {["Todos", "Delegacia", "Hospital", "Centro de Apoio"].map((cat) => (
+                  <motion.button
+                    key={cat}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => setFiltro(cat)}
+                    className={`px-6 py-3 rounded-xl font-semibold transition-all shadow-md ${
+                      filtro === cat
+                        ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white"
+                        : "bg-white text-purple-700 border-2 border-purple-300 hover:bg-purple-50"
+                    }`}
+                  >
+                    {cat}
+                  </motion.button>
+                ))}
+              </div>
+            </motion.div>
           </>
         )}
 
-        <div
-          className={`flex flex-col lg:flex-row justify-center items-start gap-10 ${
-            telaCheia ? "flex-col" : ""
-          }`}
-        >
+        <div className={`max-w-7xl mx-auto ${telaCheia ? "" : "flex flex-col lg:flex-row gap-8"}`}>
           {!telaCheia && (
-            <div className="w-full max-w-md">
-              <Swiper
-                spaceBetween={25}
-                slidesPerView={1}
-                pagination={{ clickable: true }}
-                modules={[Pagination]}
-                className="pb-8"
-              >
-                {locaisFiltrados.map((local, idx) => (
-                  <SwiperSlide key={idx}>
-                    <motion.div
-                      whileHover={{ scale: 1.02 }}
-                      className="bg-white rounded-3xl border border-purple-200 p-6"
-                    >
-                      <h2 className="text-2xl font-semibold text-purple-800 mb-3 flex items-center gap-2">
-                        <FaHeart className="text-purple-500" /> {local.nome}
-                      </h2>
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.6 }}
+              className="w-full lg:w-96"
+            >
+              <div className="bg-white/90 backdrop-blur-md rounded-2xl p-6 shadow-xl border border-purple-200">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="bg-gradient-to-r from-purple-500 to-pink-500 p-3 rounded-full">
+                    <FaHeart className="text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-purple-900">Locais de Apoio</h3>
+                </div>
+                
+                <Swiper
+                  spaceBetween={20}
+                  slidesPerView={1}
+                  pagination={{ clickable: true }}
+                  modules={[Pagination]}
+                  className="pb-8"
+                >
+                  {locaisFiltrados.map((local, idx) => (
+                    <SwiperSlide key={idx}>
+                      <motion.div
+                        whileHover={{ scale: 1.02 }}
+                        className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl border border-purple-200 p-6 shadow-lg"
+                      >
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className="w-12 h-12 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full flex items-center justify-center">
+                            <span className="text-white text-xl">
+                              {local.categoria === 'Delegacia' ? '🏛️' : 
+                               local.categoria === 'Hospital' ? '🏥' : '💜'}
+                            </span>
+                          </div>
+                          <div>
+                            <h4 className="font-bold text-purple-900 text-lg leading-tight">{local.nome}</h4>
+                            <span className="text-sm text-purple-600 bg-purple-100 px-2 py-1 rounded-full">
+                              {local.categoria}
+                            </span>
+                          </div>
+                        </div>
 
-                      <div className="space-y-2 text-purple-700">
-                        <p className="flex items-center gap-2">
-                          <FaMapMarkerAlt className="text-purple-400" />{" "}
-                          {local.endereco}
-                        </p>
-                        <p className="flex items-center gap-2">
-                          <FaClock className="text-purple-400" /> {local.horario}
-                        </p>
-                        <p>{local.descricao}</p>
-                      </div>
+                        <div className="space-y-3 text-purple-700 mb-6">
+                          <div className="flex items-start gap-2">
+                            <FaMapMarkerAlt className="text-purple-400 mt-1 flex-shrink-0" />
+                            <span className="text-sm">{local.endereco}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <FaClock className="text-purple-400" />
+                            <span className="text-sm font-medium">{local.horario}</span>
+                          </div>
+                          <p className="text-sm text-purple-600 bg-white/60 p-3 rounded-xl">
+                            {local.descricao}
+                          </p>
+                        </div>
 
-                      <div className="flex flex-col gap-3 mt-5">
-                        <a
-                          href={`tel:${local.telefone.replace(/\D/g, "")}`}
-                          className="w-full bg-purple-600 hover:bg-purple-700 transition text-white font-bold py-3 rounded-full text-center flex items-center justify-center gap-2"
-                        >
-                          <FaPhoneAlt /> Ligar Agora
-                        </a>
+                        <div className="space-y-3">
+                          <motion.a
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            href={`tel:${local.telefone.replace(/\D/g, "")}`}
+                            className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-3 rounded-xl text-center flex items-center justify-center gap-2 shadow-lg transition-all"
+                          >
+                            <FaPhoneAlt /> Ligar Agora
+                          </motion.a>
 
-                        <button
-                          onClick={() => setDestino(local.coords)}
-                          className="w-full bg-purple-200 hover:bg-purple-300 transition text-purple-900 font-bold py-3 rounded-full"
-                        >
-                          Traçar rota aqui
-                        </button>
+                          <motion.button
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            onClick={() => setDestino(local.coords)}
+                            className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-3 rounded-xl shadow-lg transition-all"
+                          >
+                            🗺️ Traçar Rota
+                          </motion.button>
 
-                        <a
-                          href={`https://www.google.com/maps/dir/?api=1&destination=${local.coords[0]},${local.coords[1]}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-full bg-purple-500 hover:bg-purple-600 transition text-white font-bold py-3 rounded-full text-center"
-                        >
-                          Ver rota no Google Maps
-                        </a>
-                      </div>
-                    </motion.div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </div>
+                          <motion.a
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            href={`https://www.google.com/maps/dir/?api=1&destination=${local.coords[0]},${local.coords[1]}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-full bg-white border-2 border-purple-300 hover:bg-purple-50 text-purple-700 font-bold py-3 rounded-xl text-center transition-all"
+                          >
+                            📱 Google Maps
+                          </motion.a>
+                        </div>
+                      </motion.div>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
+            </motion.div>
           )}
 
           {/* Mapa */}
           <motion.div
-              className={`relative ${
-                telaCheia
-                  ? "fixed top-0 left-0 w-screen h-screen z-[9998]"
-                  : "w-full max-w-5xl h-[700px]"
-              } rounded-3xl shadow-lg border border-purple-300 overflow-hidden bg-white`}
-            >
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.8 }}
+            className={`relative ${
+              telaCheia
+                ? "fixed top-0 left-0 w-screen h-screen z-[9998]"
+                : "flex-1 h-[700px]"
+            } rounded-3xl shadow-2xl border border-purple-300 overflow-hidden bg-white`}
+          >
             <MapContainer
               ref={mapRef}
               center={[-22.231, -45.935]}

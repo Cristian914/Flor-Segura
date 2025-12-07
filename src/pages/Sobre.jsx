@@ -29,31 +29,26 @@ const SobrePage = () => {
     }
   ];
 
-  const conquistas = [
-    { numero: "2.500+", texto: "Mulheres Atendidas" },
-    { numero: "50+", texto: "Locais Mapeados" },
-    { numero: "24/7", texto: "Suporte Disponível" },
-    { numero: "98%", texto: "Satisfação" }
-  ];
+
 
   const equipe = [
     {
-      nome: "Cristian",
-      cargo: "Fundador & Desenvolvedor",
-      descricao: "Apaixonado por tecnologia e impacto social",
+      nome: "Matheus",
+      cargo: "Co-Fundador",
+      descricao: "Especialista em desenvolvimento e arquitetura de sistemas",
       avatar: "👨‍💻"
     },
     {
-      nome: "Equipe Técnica",
-      cargo: "Desenvolvimento & Suporte",
-      descricao: "Especialistas em segurança digital",
-      avatar: "👥"
+      nome: "Nycolas",
+      cargo: "Co-Fundador",
+      descricao: "Focado em UX/UI e experiência do usuário",
+      avatar: "🎨"
     },
     {
-      nome: "Parceiros",
-      cargo: "Rede de Apoio",
-      descricao: "Delegacias, hospitais e ONGs",
-      avatar: "🤝"
+      nome: "Cristian",
+      cargo: "Co-Fundador",
+      descricao: "Apaixonado por tecnologia e impacto social",
+      avatar: "🚀"
     }
   ];
 
@@ -163,7 +158,11 @@ const SobrePage = () => {
             </div>
           </motion.section>
 
-          {/* Conquistas */}
+
+
+
+
+          {/* Nossa Missão */}
           <motion.section
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -171,30 +170,18 @@ const SobrePage = () => {
             transition={{ duration: 0.8 }}
             className="mb-20"
           >
-            <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl p-8 md:p-12 text-white shadow-2xl">
-              <h2 className="text-4xl font-bold mb-12 text-center">
-                Nosso Impacto
+            <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl p-8 md:p-12 text-white shadow-2xl text-center">
+              <h2 className="text-4xl font-bold mb-8">
+                Nossa Missão 🎯
               </h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                {conquistas.map((conquista, index) => (
-                  <motion.div
-                    key={index}
-                    whileHover={{ scale: 1.05 }}
-                    className="text-center"
-                  >
-                    <div className="text-4xl md:text-5xl font-bold mb-2">
-                      {conquista.numero}
-                    </div>
-                    <div className="text-lg opacity-90">
-                      {conquista.texto}
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
+              <p className="text-xl leading-relaxed max-w-4xl mx-auto">
+                Empoderar mulheres através da tecnologia, criando uma rede colaborativa 
+                de segurança e apoio que transforma vidas e fortalece comunidades.
+              </p>
             </div>
           </motion.section>
 
-          {/* Nossa Equipe */}
+          {/* Tecnologias e Segurança */}
           <motion.section
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -203,71 +190,36 @@ const SobrePage = () => {
             className="mb-20"
           >
             <h2 className="text-4xl font-bold text-purple-700 mb-12 text-center">
-              Quem Somos
+              Tecnologia e Segurança
             </h2>
-            <div className="grid md:grid-cols-3 gap-8">
-              {equipe.map((membro, index) => (
-                <motion.div
-                  key={index}
-                  whileHover={{ scale: 1.02, y: -5 }}
-                  className="bg-white/80 backdrop-blur-md rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-all duration-300"
-                >
-                  <div className="text-6xl mb-4">
-                    {membro.avatar}
-                  </div>
-                  <h3 className="text-2xl font-bold text-purple-700 mb-2">
-                    {membro.nome}
-                  </h3>
-                  <p className="text-purple-500 font-semibold mb-3">
-                    {membro.cargo}
-                  </p>
-                  <p className="text-gray-600">
-                    {membro.descricao}
-                  </p>
-                </motion.div>
-              ))}
+            <div className="grid md:grid-cols-2 gap-8">
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                className="bg-white/80 backdrop-blur-md rounded-2xl p-8 shadow-lg"
+              >
+                <div className="text-4xl mb-4">🔒</div>
+                <h3 className="text-2xl font-bold text-purple-700 mb-4">Segurança Total</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Seus dados são protegidos com criptografia de ponta e nunca são compartilhados 
+                  sem sua autorização. Privacidade é um direito, não um privilégio.
+                </p>
+              </motion.div>
+              
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                className="bg-white/80 backdrop-blur-md rounded-2xl p-8 shadow-lg"
+              >
+                <div className="text-4xl mb-4">🚀</div>
+                <h3 className="text-2xl font-bold text-purple-700 mb-4">Inovação Constante</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Desenvolvemos continuamente novas funcionalidades baseadas no feedback 
+                  das usuárias para melhorar sua experiência e segurança.
+                </p>
+              </motion.div>
             </div>
           </motion.section>
 
-          {/* Missão, Visão e Valores */}
-          <motion.section
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="mb-20"
-          >
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="bg-white/80 backdrop-blur-md rounded-2xl p-8 shadow-lg text-center">
-                <div className="text-4xl mb-4">🎯</div>
-                <h3 className="text-2xl font-bold text-purple-700 mb-4">Missão</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Empoderar mulheres através da tecnologia, criando uma rede colaborativa 
-                  de segurança e apoio que salva vidas e transforma comunidades.
-                </p>
-              </div>
-              
-              <div className="bg-white/80 backdrop-blur-md rounded-2xl p-8 shadow-lg text-center">
-                <div className="text-4xl mb-4">🔮</div>
-                <h3 className="text-2xl font-bold text-purple-700 mb-4">Visão</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Ser a principal plataforma de segurança feminina no Brasil, 
-                  reconhecida pela inovação, impacto social e transformação de vidas.
-                </p>
-              </div>
-              
-              <div className="bg-white/80 backdrop-blur-md rounded-2xl p-8 shadow-lg text-center">
-                <div className="text-4xl mb-4">💎</div>
-                <h3 className="text-2xl font-bold text-purple-700 mb-4">Compromisso</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Manter sempre a privacidade, segurança e bem-estar das usuárias 
-                  como nossa prioridade número um em todas as decisões.
-                </p>
-              </div>
-            </div>
-          </motion.section>
-
-          {/* Call to Action */}
+          {/* Call to Action Final */}
           <motion.section
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -275,20 +227,29 @@ const SobrePage = () => {
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <div className="bg-white/80 backdrop-blur-md rounded-3xl p-8 md:p-12 shadow-xl">
-              <h2 className="text-3xl font-bold text-purple-700 mb-6">
-                Faça Parte da Nossa História
+            <div className="bg-gradient-to-br from-purple-100 to-pink-100 rounded-3xl p-8 md:p-12 border-2 border-purple-200">
+              <div className="text-6xl mb-6">🌸</div>
+              <h2 className="text-3xl font-bold text-purple-800 mb-6">
+                Juntas Somos Mais Fortes
               </h2>
-              <p className="text-xl text-gray-700 mb-8 max-w-3xl mx-auto">
-                Junte-se a milhares de mulheres que já encontraram segurança, 
-                apoio e empoderamento através da Flor Segura.
+              <p className="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
+                Cada mulher que se junta à nossa comunidade torna todas nós mais seguras. 
+                Faça parte dessa transformação.
               </p>
-              <button 
-                onClick={() => window.location.href = '/register'}
-                className="bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-4 px-8 rounded-xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300 shadow-lg hover:shadow-xl"
-              >
-                Cadastre-se Gratuitamente 💜
-              </button>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button 
+                  onClick={() => window.location.href = '/register'}
+                  className="bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-4 px-8 rounded-xl hover:shadow-lg transition-all duration-300"
+                >
+                  Começar Agora 💜
+                </button>
+                <button 
+                  onClick={() => window.location.href = '/mapa'}
+                  className="border-2 border-purple-600 text-purple-600 font-bold py-4 px-8 rounded-xl hover:bg-purple-600 hover:text-white transition-all duration-300"
+                >
+                  Explorar Mapa 🗺️
+                </button>
+              </div>
             </div>
           </motion.section>
         </div>
