@@ -1,2 +1,38 @@
 @import "tailwindcss";
 @import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
+
+/* Correção do cursor - só deve aparecer em campos de texto */
+* {
+  cursor: default;
+  user-select: none;
+}
+
+/* Cursor de texto apenas onde deve aparecer */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="search"],
+textarea,
+[contenteditable="true"] {
+  cursor: text !important;
+  user-select: text !important;
+}
+
+/* Cursor pointer para elementos clicáveis */
+button,
+a,
+[role="button"],
+.cursor-pointer {
+  cursor: pointer !important;
+  user-select: none !important;
+}
+
+/* Permitir seleção de texto em parágrafos e títulos */
+p,
+h1, h2, h3, h4, h5, h6,
+span,
+label {
+  user-select: text;
+  cursor: default;
+}
